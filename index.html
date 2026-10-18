@@ -3,15 +3,14 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Felices dos meses, honey 💙</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Felices dos meses, honey ♡</title>
 
 <style>
 :root {
   --blue-light: #8ba3c5;
   --blue-mid: #3c5070;
   --blue-dark: #091426;
-  --burgundy: #650f29;
 }
 
 * {
@@ -20,8 +19,8 @@
 
 html, body {
   margin: 0;
-  min-height: 100%;
   width: 100%;
+  min-height: 100%;
   font-family: Georgia, "Times New Roman", serif;
 }
 
@@ -45,7 +44,7 @@ button {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 1s ease, visibility 1s ease;
+  transition: opacity .8s ease, visibility .8s ease;
 }
 
 .screen.active {
@@ -54,10 +53,12 @@ button {
   pointer-events: auto;
 }
 
-/* PANTALLA INICIAL */
+/* =================================
+   1. PORTADA AZUL
+================================= */
 
 #startScreen {
-  overflow: auto;
+  overflow-y: auto;
   padding: 24px;
   text-align: center;
   color: #233b5e;
@@ -71,7 +72,7 @@ button {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: .22;
+  opacity: .2;
   background-image: repeating-linear-gradient(
     0deg,
     transparent,
@@ -83,11 +84,11 @@ button {
 .start-content {
   position: relative;
   width: min(100%, 600px);
-  padding: 40px 20px;
+  padding: 35px 12px;
 }
 
 .small-label {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   font-size: 12px;
   letter-spacing: .3em;
   text-transform: uppercase;
@@ -108,12 +109,12 @@ button {
 }
 
 .start-button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 115px;
-  height: 115px;
-  margin-top: 42px;
+  width: 112px;
+  height: 112px;
+  margin: 40px auto 0;
   padding: 12px;
   border: 1px solid #e1e9f5;
   border-radius: 50%;
@@ -124,23 +125,29 @@ button {
 }
 
 .start-button:hover {
-  transform: scale(1.07);
+  transform: scale(1.06);
   background: #243c60;
 }
 
-/* ESPIRAL DEL CORAZÓN */
+/* =================================
+   2. ESPIRAL GIGANTE
+================================= */
 
 #heartScreen {
-  background:
-    radial-gradient(ellipse, #10213b 0%, #050c18 65%, #000 100%);
   overflow: hidden;
+  background: radial-gradient(
+    ellipse,
+    #10213b 0%,
+    #050c18 65%,
+    #000 100%
+  );
 }
 
 #heartSpiral {
-  width: 100%;
-  height: 100%;
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 #heartSpiral path {
@@ -164,16 +171,16 @@ button {
 
 .heart-button {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   width: clamp(76px, 19vw, 115px);
   aspect-ratio: 1;
   padding: 0;
   border: 0;
   background: transparent;
-  transform: translate(-50%, -50%) scale(.6);
   opacity: 0;
-  transition: opacity 1s, transform 1s;
+  transform: translate(-50%, -50%) scale(.6);
+  transition: opacity .9s, transform .9s;
 }
 
 .heart-button.visible {
@@ -204,14 +211,17 @@ button {
   display: none;
 }
 
-/* FLOR DE PALABRAS */
+/* =================================
+   3. CHOCOLATE COSMOS DE PALABRAS
+================================= */
 
 #flowerScreen {
-  background: #000;
   overflow: hidden;
+  background: #000;
 }
 
 #flowerSvg {
+  display: block;
   width: min(100vw, 100vh);
   height: min(100vw, 100vh);
   max-width: 100%;
@@ -221,26 +231,25 @@ button {
 
 .flower-word {
   opacity: 0;
-  animation: wordAppear .32s ease-out forwards;
   font-family: Georgia, "Times New Roman", serif;
   font-weight: normal;
+  letter-spacing: .15px;
   text-anchor: middle;
+  animation: wordAppear .38s ease-out forwards;
 }
 
 @keyframes wordAppear {
-  0% {
+  from {
     opacity: 0;
   }
-  100% {
+  to {
     opacity: 1;
   }
 }
 
-.flower-glow {
-  filter: drop-shadow(0 0 3px #67132b30);
-}
-
-/* TRANSICIÓN A LA CARTA */
+/* =================================
+   4. TRANSICIÓN
+================================= */
 
 #fadeOverlay {
   position: fixed;
@@ -256,21 +265,19 @@ button {
   opacity: 1;
 }
 
-/* CARTA ANTIGUA */
+/* =================================
+   5. CARTA ANTIGUA
+================================= */
 
 #letterScreen {
   padding: 22px 14px;
   overflow-y: auto;
   align-items: flex-start;
-  background:
-    radial-gradient(ellipse at center, #162641 0%, #080e19 78%);
-  opacity: 0;
-  visibility: hidden;
-}
-
-#letterScreen.reveal {
-  opacity: 1;
-  visibility: visible;
+  background: radial-gradient(
+    ellipse at center,
+    #162641 0%,
+    #080e19 78%
+  );
 }
 
 .letter-paper {
@@ -285,8 +292,8 @@ button {
     linear-gradient(135deg, #e6dfcc, #f4eddb 45%, #ded5c0);
   border: 1px solid #a7a18f;
   box-shadow: 0 15px 55px #0009, inset 0 0 35px #81775c20;
-  transform: translateY(18px);
-  transition: transform 1.2s ease;
+  transform: translateY(15px);
+  transition: transform 1s ease;
 }
 
 #letterScreen.reveal .letter-paper {
@@ -396,20 +403,12 @@ button {
     line-height: 1.75;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .screen,
-  .heart-button,
-  .letter-paper {
-    transition-duration: .2s;
-  }
-}
 </style>
 </head>
 
 <body>
 
-<!-- PANTALLA 1: INICIO -->
+<!-- PORTADA -->
 
 <section id="startScreen" class="screen active">
   <div class="paper-texture"></div>
@@ -427,7 +426,7 @@ button {
   </div>
 </section>
 
-<!-- PANTALLA 2: ESPIRAL -->
+<!-- ESPIRAL -->
 
 <section id="heartScreen" class="screen">
   <svg id="heartSpiral"
@@ -440,7 +439,8 @@ button {
   <button id="heartButton"
           class="heart-button"
           type="button"
-          aria-label="Continuar">
+          aria-label="Continuar"
+          hidden>
     <svg viewBox="0 0 100 100" aria-hidden="true">
       <path d="M50 88
                C42 79 9 58 9 32
@@ -451,22 +451,20 @@ button {
   </button>
 </section>
 
-<!-- PANTALLA 3: FLOR HECHA DE PALABRAS -->
+<!-- FLOR -->
 
 <section id="flowerScreen" class="screen">
   <svg id="flowerSvg"
        viewBox="0 0 900 900"
        role="img"
-       aria-label="Una flor formada por palabras de amor">
-    <g id="flowerWords" class="flower-glow"></g>
+       aria-label="Flor de chocolate cosmos formada por palabras de amor">
+    <g id="flowerWords"></g>
   </svg>
 </section>
 
-<!-- TRANSICIÓN OSCURA -->
-
 <div id="fadeOverlay"></div>
 
-<!-- PANTALLA 4: CARTA -->
+<!-- CARTA -->
 
 <section id="letterScreen" class="screen">
   <article class="letter-paper">
@@ -504,12 +502,10 @@ Felices dos meses, mi amor. Que este sea uno de muchos aniversarios nuestros. �
       </div>
 
       <div class="letter-image-wrap">
-        <img
-          id="finalImage"
-          src="dibujo-final.png"
-          alt="Un dibujo hecho especialmente para ti"
-          hidden
-        >
+        <img id="finalImage"
+             src="dibujo-final.png"
+             alt="Un dibujo hecho especialmente para ti"
+             hidden>
 
         <div id="imagePlaceholder">
           Aquí va tu dibujo final ♡<br>
@@ -523,14 +519,12 @@ Felices dos meses, mi amor. Que este sea uno de muchos aniversarios nuestros. �
 </section>
 
 <script>
-/* ==============================
-   CONFIGURACIÓN
-   ============================== */
+/* CONFIGURACIÓN */
 
 const HEART_DRAW_TIME = 14000;
+const WORD_INTERVAL = 75;
+const WORD_ANIMATION_TIME = 380;
 const WAIT_AFTER_FLOWER = 2000;
-const WORD_INTERVAL = 35;
-const WORD_ANIMATION_TIME = 320;
 
 const startScreen = document.getElementById("startScreen");
 const heartScreen = document.getElementById("heartScreen");
@@ -539,7 +533,6 @@ const letterScreen = document.getElementById("letterScreen");
 
 const startButton = document.getElementById("startButton");
 const heartButton = document.getElementById("heartButton");
-
 const heartPath = document.getElementById("heartPath");
 const flowerWords = document.getElementById("flowerWords");
 const fadeOverlay = document.getElementById("fadeOverlay");
@@ -548,9 +541,7 @@ let heartStarted = false;
 let flowerStarted = false;
 let transitionStarted = false;
 
-/* ==============================
-   CAMBIAR DE PANTALLA
-   ============================== */
+/* CAMBIAR PANTALLAS */
 
 function showScreen(screen) {
   [startScreen, heartScreen, flowerScreen, letterScreen]
@@ -559,18 +550,13 @@ function showScreen(screen) {
   screen.classList.add("active");
 }
 
-/* ==============================
-   CORAZÓN ESPIRAL GRANDE
-   ============================== */
+/* CORAZÓN ESPIRAL */
 
 function createHeartSpiral() {
   const centerX = 500;
   const centerY = 510;
-
-  // Estos valores hacen que el corazón sea mucho más grande.
   const scaleX = 22;
   const scaleY = 22;
-
   const turns = 7.2;
   const totalAngle = Math.PI * 2 * turns;
   const steps = 5000;
@@ -580,17 +566,11 @@ function createHeartSpiral() {
   for (let i = 0; i <= steps; i++) {
     const progress = i / steps;
     const t = progress * totalAngle;
-
-    // La espiral se encoge gradualmente hacia el centro.
     const scale = 1 - 0.84 * progress;
 
-    const sinT = Math.sin(t);
-    const cosT = Math.cos(t);
-
-    const heartX = 16 * Math.pow(sinT, 3);
-
+    const heartX = 16 * Math.pow(Math.sin(t), 3);
     const heartY =
-      13 * cosT -
+      13 * Math.cos(t) -
       5 * Math.cos(2 * t) -
       2 * Math.cos(3 * t) -
       Math.cos(4 * t);
@@ -605,15 +585,13 @@ function createHeartSpiral() {
   heartPath.setAttribute("d", path);
 
   const length = heartPath.getTotalLength();
-
   heartPath.style.strokeDasharray = length;
   heartPath.style.strokeDashoffset = length;
-
   heartPath.classList.remove("draw");
-  heartButton.classList.remove("visible");
-  heartButton.hidden = true;
 
-  // Reiniciar la animación.
+  heartButton.hidden = true;
+  heartButton.classList.remove("visible");
+
   void heartPath.getBoundingClientRect();
 
   requestAnimationFrame(() => {
@@ -634,47 +612,33 @@ startButton.addEventListener("click", () => {
 
   heartStarted = true;
   showScreen(heartScreen);
-
   setTimeout(createHeartSpiral, 100);
 });
 
-/* ==============================
-   PALABRAS DE AMOR
-   ============================== */
+/* PALABRAS */
 
-const loveWords = [
-  "te amo", "I love you", "je t'aime", "ti amo",
-  "ich liebe dich", "te quiero", "愛してる",
-  "사랑해", "я тебя люблю", "eu te amo",
-  "amo-te", "ya tebya lyublyu", "我爱你",
-  "我愛你", "사랑해요", "seni seviyorum",
-  "मैं तुमसे प्यार करता हूँ", "ana behibak",
-  "kocham cię", "ik hou van jou", "miluji tě",
-  "volim te", "jeg elsker dig", "jag älskar dig",
-  "t'estimo", "mahal kita", "aku cinta kamu",
-  "ngiyakuthanda", "rwy'n dy garu di",
-  "te iubesc", "kocham cię", "te amo",
-  "I adore you", "mon amour", "mi amor",
-  "honey", "my love", "forever", "always",
-  "je t'adore", "amore mio", "mein Schatz",
-  "querido", "mi vida", "corazón",
-  "mi cielo", "люблю тебя", "사랑",
-  "愛", "amor", "love", "te amo"
+const phrases = [
+  "te amo", "I love you", "mi amor",
+  "je t'aime", "ti amo", "my love",
+  "te quiero", "amore mio", "mon amour",
+  "forever", "mi vida", "honey",
+  "愛してる", "我爱你", "사랑해",
+  "ich liebe dich", "eu te amo", "mi cielo",
+  "always", "corazón", "te adoro"
 ];
 
-const burgundyShades = [
-  "#430719",
-  "#5a0b23",
-  "#6b102c",
-  "#791633",
-  "#8b203d",
-  "#571022",
-  "#a02a48",
-  "#74142e",
-  "#3b0616"
+const shades = [
+  "#3b0616",
+  "#49071a",
+  "#560a20",
+  "#650e27",
+  "#74142d",
+  "#831b36",
+  "#91233d",
+  "#681027"
 ];
 
-function makeSvgText(text, x, y, fontSize, color, delay) {
+function addWord(parent, text, x, y, size, delayIndex) {
   const node = document.createElementNS(
     "http://www.w3.org/2000/svg",
     "text"
@@ -683,45 +647,32 @@ function makeSvgText(text, x, y, fontSize, color, delay) {
   node.textContent = text;
   node.setAttribute("x", x);
   node.setAttribute("y", y);
-  node.setAttribute("font-size", fontSize);
-  node.setAttribute("fill", color);
+  node.setAttribute("font-size", size);
+  node.setAttribute(
+    "fill",
+    shades[delayIndex % shades.length]
+  );
+  node.setAttribute("text-anchor", "middle");
   node.setAttribute("class", "flower-word");
-  node.style.animationDelay = delay + "ms";
 
-  flowerWords.appendChild(node);
+  node.style.animationDelay =
+    (delayIndex * WORD_INTERVAL) + "ms";
 
-  return node;
+  parent.appendChild(node);
 }
 
-/* ==============================
-   CONSTRUIR LA FLOR
-   Solo se dibujan palabras.
-   No se dibujan pétalos ni tallos.
-   ============================== */
+/* FLOR CHOCOLATE COSMOS */
 
 function createFlower() {
   flowerWords.replaceChildren();
 
   let wordIndex = 0;
 
-  function addWord(text, x, y, size) {
-    const color = burgundyShades[
-      wordIndex % burgundyShades.length
-    ];
+  // Cada pétalo está formado por líneas de texto.
+  // Los ángulos distribuyen los pétalos alrededor del centro.
+  const petalAngles = [-90, -45, 0, 45, 90, 135, 180, 225];
 
-    const delay = wordIndex * WORD_INTERVAL;
-
-    makeSvgText(text, x, y, size, color, delay);
-
-    wordIndex++;
-  }
-
-  // Diez pétalos formados únicamente por palabras.
-  const petalCount = 10;
-
-  for (let petal = 0; petal < petalCount; petal++) {
-    const angle = petal * (360 / petalCount);
-
+  petalAngles.forEach((angle, petalIndex) => {
     const group = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "g"
@@ -729,95 +680,93 @@ function createFlower() {
 
     group.setAttribute(
       "transform",
-      `translate(450 450) rotate(${angle})`
+      `translate(450 455) rotate(${angle})`
     );
 
     flowerWords.appendChild(group);
 
-    // Filas de texto que forman un pétalo alargado.
-    const rows = 13;
+    const rows = 21;
 
     for (let row = 0; row < rows; row++) {
-      const normalized = (row - (rows - 1) / 2) /
-        ((rows - 1) / 2);
+      const t = row / (rows - 1);
 
-      const y = normalized * 48;
+      // Forma larga con puntas estrechas y zona central ancha.
+      const widthShape = Math.pow(Math.sin(Math.PI * t), 0.72);
+      const halfWidth = 4 + 48 * widthShape;
+      const y = -42 - t * 245;
 
-      // Los extremos del pétalo se estrechan.
-      const taper = Math.sqrt(
-        Math.max(0, 1 - normalized * normalized)
-      );
+      const phrase =
+        phrases[(petalIndex * 5 + row) % phrases.length];
 
-      const startX = 20 + (1 - taper) * 80;
-      const endX = 225 - (1 - taper) * 100;
-
-      let x = startX;
-
-      while (x < endX) {
-        const phrase =
-          loveWords[
-            wordIndex % loveWords.length
-          ];
-
-        const size = 9 + (row % 3);
-
-        const color = burgundyShades[
-          wordIndex % burgundyShades.length
-        ];
-
-        const delay = wordIndex * WORD_INTERVAL;
-
-        const node = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "text"
+      if (halfWidth > 34) {
+        // Dos frases con espacio entre ellas.
+        addWord(
+          group,
+          phrase,
+          -halfWidth * 0.48,
+          y,
+          8,
+          wordIndex++
         );
 
-        node.textContent = phrase;
-        node.setAttribute("x", x);
-        node.setAttribute("y", y);
-        node.setAttribute("font-size", size);
-        node.setAttribute("fill", color);
-        node.setAttribute("class", "flower-word");
-        node.setAttribute("text-anchor", "start");
-        node.style.animationDelay = delay + "ms";
+        const second =
+          phrases[(petalIndex * 5 + row + 7) % phrases.length];
 
-        group.appendChild(node);
-
-        // Avanza para distribuir las palabras a lo largo de la fila.
-        x += phrase.length * size * 0.49 + 5;
-        wordIndex++;
+        addWord(
+          group,
+          second,
+          halfWidth * 0.48,
+          y,
+          8,
+          wordIndex++
+        );
+      } else {
+        // Una sola frase en las puntas.
+        addWord(
+          group,
+          phrase,
+          0,
+          y,
+          8,
+          wordIndex++
+        );
       }
     }
-  }
+  });
 
-  // Centro hecho también de palabras, sin círculo dibujado.
-  for (let ring = 0; ring < 5; ring++) {
-    const radius = 8 + ring * 10;
+  // Centro oscuro: palabras pequeñas, sin círculo ni figura sólida.
+  const centerPhrases = [
+    "te amo", "love", "amor", "mi amor",
+    "te amo", "always", "my love", "te quiero"
+  ];
+
+  for (let ring = 0; ring < 3; ring++) {
+    const radius = 7 + ring * 12;
     const count = 5 + ring * 3;
 
     for (let i = 0; i < count; i++) {
-      const angle = (Math.PI * 2 * i) / count;
+      const angle = Math.PI * 2 * i / count;
 
       const x = 450 + Math.cos(angle) * radius;
-      const y = 450 + Math.sin(angle) * radius;
+      const y = 455 + Math.sin(angle) * radius;
 
-      const phrase =
-        loveWords[wordIndex % loveWords.length];
-
-      addWord(phrase, x, y, 9 + (ring % 2));
+      addWord(
+        flowerWords,
+        centerPhrases[wordIndex % centerPhrases.length],
+        x,
+        y,
+        7,
+        wordIndex++
+      );
     }
   }
 
-  // Tiempo real hasta que termine de aparecer la última palabra.
-  const totalWords = wordIndex;
-  const lastDelay = Math.max(0, totalWords - 1) * WORD_INTERVAL;
-
-  return lastDelay + WORD_ANIMATION_TIME;
+  // Calcula el final según la última palabra.
+  return Math.max(0, wordIndex - 1) * WORD_INTERVAL
+    + WORD_ANIMATION_TIME;
 }
 
-/* ==============================
-   REVELAR LA CARTA
-   ============================== */
+/* TRANSICIÓN A LA CARTA */
 
 function revealLetter(flowerDuration) {
   if (transitionStarted) return;
@@ -825,7 +774,6 @@ function revealLetter(flowerDuration) {
   transitionStarted = true;
 
   setTimeout(() => {
-    // Oscurece la flor antes de mostrar la carta.
     fadeOverlay.classList.add("show");
 
     setTimeout(() => {
@@ -845,27 +793,21 @@ function revealLetter(flowerDuration) {
   }, flowerDuration + WAIT_AFTER_FLOWER);
 }
 
-/* ==============================
-   INICIAR LA FLOR
-   ============================== */
+/* BOTÓN DEL CORAZÓN */
 
 heartButton.addEventListener("click", () => {
   if (flowerStarted) return;
 
   flowerStarted = true;
-
   showScreen(flowerScreen);
 
-  // Deja que se muestre el fondo negro antes de construirla.
   setTimeout(() => {
     const flowerDuration = createFlower();
     revealLetter(flowerDuration);
   }, 250);
 });
 
-/* ==============================
-   MOSTRAR TU DIBUJO FINAL
-   ============================== */
+/* DIBUJO FINAL */
 
 const finalImage = document.getElementById("finalImage");
 const imagePlaceholder = document.getElementById("imagePlaceholder");
@@ -880,7 +822,6 @@ finalImage.addEventListener("error", () => {
   imagePlaceholder.hidden = false;
 });
 
-// Por si la imagen ya estaba en caché.
 if (finalImage.complete && finalImage.naturalWidth > 0) {
   finalImage.hidden = false;
   imagePlaceholder.hidden = true;
