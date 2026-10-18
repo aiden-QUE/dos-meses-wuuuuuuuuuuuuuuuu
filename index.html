@@ -2,604 +2,550 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#243b5a">
-  <title>Felices dos meses, honey 💙</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#243b5a">
+<title>Felices dos meses, honey ♡</title>
 
-  <style>
-    :root {
-      --blue-light: #b6cce5;
-      --blue-medium: #6687b1;
-      --blue-dark: #243b5a;
-      --blue-deep: #101d35;
-      --paper: #e5edf7;
-      --ink: #233b5c;
-    }
+<style>
+:root {
+  --blue-light: #c2d1e5;
+  --blue-medium: #718bad;
+  --blue-dark: #243b5a;
+  --blue-deep: #101b30;
+  --ink: #344968;
+  --paper: #e5e0d2;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+* { box-sizing: border-box; }
 
-    html,
-    body {
-      margin: 0;
-      width: 100%;
-      min-height: 100%;
-      overflow: hidden;
-    }
+html, body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
 
-    body {
-      font-family: Georgia, "Times New Roman", serif;
-      background: var(--blue-dark);
-    }
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  background: var(--blue-dark);
+}
 
-    button {
-      font: inherit;
-      -webkit-tap-highlight-color: transparent;
-    }
+button { font: inherit; }
 
-    /* =====================================
-       TEXTURA DE PAPEL
-       ===================================== */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
 
-    .paper-texture {
-      background-color: var(--paper);
-      background-image:
-        radial-gradient(
-          ellipse at 15% 20%,
-          rgba(255,255,255,.55),
-          transparent 45%
-        ),
-        radial-gradient(
-          ellipse at 85% 75%,
-          rgba(88,117,157,.12),
-          transparent 50%
-        ),
-        repeating-linear-gradient(
-          0deg,
-          rgba(50,75,110,.025) 0px,
-          rgba(50,75,110,.025) 1px,
-          transparent 1px,
-          transparent 4px
-        ),
-        repeating-linear-gradient(
-          90deg,
-          rgba(255,255,255,.08) 0px,
-          rgba(255,255,255,.08) 1px,
-          transparent 1px,
-          transparent 5px
-        );
-    }
+.screen.active { display: flex; }
 
-    /* =====================================
-       PANTALLAS
-       ===================================== */
+/* ==================================
+   TEXTURAS
+   ================================== */
 
-    .screen {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      height: 100dvh;
-      overflow: hidden;
-    }
+.paper-texture {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse at 15% 12%,
+      rgba(255,255,255,.7), transparent 48%),
+    radial-gradient(ellipse at 90% 90%,
+      rgba(94,112,139,.18), transparent 48%),
+    repeating-linear-gradient(0deg,
+      rgba(80,87,99,.035) 0px,
+      rgba(80,87,99,.035) 1px,
+      transparent 1px, transparent 4px),
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.09) 0px,
+      rgba(255,255,255,.09) 1px,
+      transparent 1px, transparent 5px);
+}
 
-    .screen.active {
-      display: flex;
-    }
+/* ==================================
+   1. PORTADA
+   ================================== */
 
-    /* =====================================
-       1. PORTADA
-       ===================================== */
+#intro {
+  padding: 24px;
+  color: #243b5a;
+  background:
+    radial-gradient(ellipse at 50% 35%,
+      rgba(235,243,253,.7), transparent 65%),
+    linear-gradient(145deg, #b7c9e1, #829dc2 55%, #6c86ad);
+}
 
-    #intro {
-      padding: 24px;
-      color: var(--blue-dark);
-      background-color: #91a9ca;
-      background-image:
-        radial-gradient(
-          ellipse at 50% 35%,
-          rgba(235,243,253,.7),
-          transparent 65%
-        ),
-        linear-gradient(
-          145deg,
-          #b7c9e1,
-          #829dc2 55%,
-          #6c86ad
-        ),
-        repeating-linear-gradient(
-          0deg,
-          rgba(255,255,255,.08) 0px,
-          rgba(255,255,255,.08) 1px,
-          transparent 1px,
-          transparent 4px
-        );
-    }
+.intro-content {
+  width: min(100%, 520px);
+  text-align: center;
+  animation: riseIn 1.5s ease both;
+}
 
-    .intro-content {
-      width: min(100%, 520px);
-      text-align: center;
-      animation: riseIn 1.2s ease both;
-    }
+.intro-eyebrow {
+  margin: 0 0 18px;
+  font-family: Arial, sans-serif;
+  font-size: .72rem;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  opacity: .75;
+}
 
-    .intro-eyebrow {
-      margin: 0 0 18px;
-      font-family: Arial, sans-serif;
-      font-size: .72rem;
-      letter-spacing: .32em;
-      text-transform: uppercase;
-      opacity: .75;
-    }
+.intro-title {
+  margin: 0;
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-weight: normal;
+  line-height: 1.06;
+  letter-spacing: -.045em;
+  text-shadow: 0 2px 12px rgba(255,255,255,.25);
+}
 
-    .intro-title {
-      margin: 0;
-      font-size: clamp(2.5rem, 10vw, 5rem);
-      font-weight: normal;
-      line-height: 1.06;
-      letter-spacing: -.045em;
-      text-shadow: 0 2px 12px rgba(255,255,255,.25);
-    }
+.intro-title span {
+  display: block;
+  margin-top: 12px;
+  font-size: .67em;
+  font-style: italic;
+  letter-spacing: .015em;
+}
 
-    .intro-title span {
-      display: block;
-      margin-top: 12px;
-      font-size: .67em;
-      font-style: italic;
-      letter-spacing: .015em;
-    }
+.intro-decoration {
+  width: 85px;
+  height: 1px;
+  margin: 30px auto;
+  background: rgba(36,59,90,.5);
+}
 
-    .intro-decoration {
-      width: 85px;
-      height: 1px;
-      margin: 30px auto;
-      background: rgba(36,59,90,.5);
-    }
+.intro-button {
+  display: grid;
+  place-items: center;
+  width: 112px;
+  height: 112px;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.75);
+  border-radius: 50%;
+  color: #edf4ff;
+  background: #34547e;
+  box-shadow: 0 8px 25px rgba(24,45,75,.2);
+  cursor: pointer;
+  transition: transform .35s, background .35s;
+}
 
-    .intro-button {
-      display: grid;
-      place-items: center;
-      width: 112px;
-      height: 112px;
-      margin: 0 auto;
-      padding: 10px;
-      border: 1px solid rgba(255,255,255,.75);
-      border-radius: 50%;
-      color: #edf4ff;
-      background: #34547e;
-      box-shadow:
-        0 8px 25px rgba(24,45,75,.2),
-        inset 0 0 0 5px rgba(255,255,255,.08);
-      cursor: pointer;
-      transition: transform .25s, background .25s;
-    }
+.intro-button:hover {
+  transform: scale(1.06);
+  background: #243f66;
+}
 
-    .intro-button:hover {
-      transform: scale(1.06);
-      background: #243f66;
-    }
+.intro-button span {
+  font-size: .92rem;
+  letter-spacing: .04em;
+}
 
-    .intro-button:active {
-      transform: scale(.96);
-    }
+/* ==================================
+   2. ESPIRAL DE CORAZÓN
+   ================================== */
 
-    .intro-button span {
-      font-size: .92rem;
-      letter-spacing: .04em;
-    }
+#heartScreen {
+  background: radial-gradient(
+    ellipse at center,
+    #1d3150 0%, #111f38 60%, #091326 100%
+  );
+}
 
-    /* =====================================
-       2. CORAZÓN DE UNA SOLA LÍNEA ESPIRAL
-       ===================================== */
+#heartCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
 
-    #heartScreen {
-      background:
-        radial-gradient(
-          ellipse at center,
-          #1d3150 0%,
-          #111f38 60%,
-          #091326 100%
-        );
-    }
+#heartSpiral {
+  fill: none;
+  stroke: #a9d2ff;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter:
+    drop-shadow(0 0 4px rgba(116,183,255,.8))
+    drop-shadow(0 0 13px rgba(92,158,242,.45));
+  stroke-dasharray: var(--path-length, 1);
+  stroke-dashoffset: var(--path-length, 1);
+}
 
-    #heartCanvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
+#heartSpiral.draw {
+  animation: drawHeart 12s cubic-bezier(.35,.25,.3,1) forwards;
+}
 
-    #heartSpiral {
-      fill: none;
-      stroke: #9dc9f6;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      filter:
-        drop-shadow(0 0 4px rgba(116,183,255,.8))
-        drop-shadow(0 0 13px rgba(92,158,242,.45));
-      stroke-dasharray: var(--path-length, 1);
-      stroke-dashoffset: var(--path-length, 1);
-    }
+@keyframes drawHeart {
+  to { stroke-dashoffset: 0; }
+}
 
-    #heartSpiral.draw {
-      animation: drawHeart 8s cubic-bezier(.25,.55,.35,1) forwards;
-    }
+/* El botón usa la silueta SVG de un corazón real */
 
-    @keyframes drawHeart {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
+.heart-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: clamp(76px, 19vw, 115px);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.25);
+  transition:
+    opacity 1.2s ease,
+    transform 1.2s cubic-bezier(.2,.8,.2,1);
+  filter: drop-shadow(0 0 15px rgba(0,0,0,.45));
+  z-index: 2;
+}
 
-    .heart-button {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      display: grid;
-      place-items: center;
-      width: clamp(65px, 16vw, 100px);
-      aspect-ratio: 1;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(.35);
-      transition:
-        opacity .8s ease,
-        transform .8s cubic-bezier(.2,.8,.2,1);
-      filter: drop-shadow(0 0 15px rgba(0,0,0,.4));
-      z-index: 2;
-    }
+.heart-button[hidden] { display: none; }
 
-    .heart-button[hidden] {
-      display: none;
-    }
+.heart-button.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
 
-    .heart-button.visible {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
+.heart-button svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
 
-    .heart-button svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
+.heart-button svg path {
+  fill: #091426;
+  stroke: #34557f;
+  stroke-width: 2.5;
+  transition: fill .4s, stroke .4s;
+}
 
-    .heart-button svg path {
-      fill: #091426;
-      stroke: #294b78;
-      stroke-width: 2;
-      transition: fill .25s, stroke .25s;
-    }
+.heart-button:hover svg path {
+  fill: #142746;
+  stroke: #7ca8df;
+}
 
-    .heart-button:hover svg path {
-      fill: #122443;
-      stroke: #628dc5;
-    }
+/* ==================================
+   3. FLOR HECHA EXCLUSIVAMENTE DE PALABRAS
+   ================================== */
 
-    /* =====================================
-       3. FLOR FORMADA SOLO POR PALABRAS
-       ===================================== */
+#flowerScreen { background: #030203; }
 
-    #flowerScreen {
-      background: #030203;
-      color: #fff;
-    }
+#flowerSvg {
+  display: block;
+  width: min(98vw, 88vh, 720px);
+  width: min(98vw, 88dvh, 720px);
+  max-height: 96%;
+  overflow: visible;
+}
 
-    #flowerSvg {
-      display: block;
-      width: min(98vw, 88vh, 720px);
-      width: min(98vw, 88dvh, 720px);
-      max-height: 96%;
-      overflow: visible;
-    }
+.flower-word {
+  opacity: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  animation: wordAppear 1.1s ease-out forwards;
+}
 
-    .flower-word {
-      opacity: 0;
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: wordAppear .65s ease-out forwards;
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: normal;
-      text-anchor: middle;
-      dominant-baseline: middle;
-    }
+@keyframes wordAppear {
+  0% { opacity: 0; }
+  30% { opacity: .3; }
+  100% { opacity: 1; }
+}
 
-    @keyframes wordAppear {
-      0% {
-        opacity: 0;
-        scale: .55;
-      }
+/* ==================================
+   4. CARTA ANTIGUA EN TONOS AZULES
+   ================================== */
 
-      65% {
-        opacity: .85;
-        scale: 1.06;
-      }
+#letterScreen {
+  z-index: 5;
+  padding: 20px 15px;
+  overflow-y: auto;
+  align-items: flex-start;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 30% 15%,
+      rgba(126,156,199,.32), transparent 55%),
+    linear-gradient(140deg, #1c2c45, #0e182a);
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  pointer-events: none;
+}
 
-      100% {
-        opacity: 1;
-        scale: 1;
-      }
-    }
+#letterScreen.active { display: flex; }
 
-    /* =====================================
-       4. CARTA SOBRE PAPEL AZUL
-       ===================================== */
+#letterScreen.reveal {
+  opacity: 1;
+  pointer-events: auto;
+}
 
-    #letterScreen {
-      z-index: 5;
-      padding: 18px;
-      overflow-y: auto;
-      align-items: flex-start;
-      justify-content: center;
-      background-color: #101a2c;
-      background-image:
-        radial-gradient(
-          ellipse at 30% 15%,
-          rgba(126,156,199,.32),
-          transparent 55%
-        ),
-        linear-gradient(140deg, #1c2c45, #0e182a);
-      opacity: 0;
-      transition: opacity 1.2s ease;
-      pointer-events: none;
-    }
+.letter-paper {
+  position: relative;
+  width: min(100%, 600px);
+  margin: auto;
+  padding: clamp(25px, 7vw, 52px);
+  border: 1px solid #aab7c7;
+  outline: 1px solid rgba(70,92,121,.55);
+  outline-offset: -8px;
+  color: var(--ink);
+  background-color: #e4e0d4;
+  background-image:
+    radial-gradient(ellipse at 12% 10%,
+      rgba(255,255,255,.8), transparent 55%),
+    radial-gradient(ellipse at 85% 90%,
+      rgba(106,137,178,.2), transparent 60%),
+    repeating-linear-gradient(0deg,
+      rgba(49,77,117,.04) 0px,
+      rgba(49,77,117,.04) 1px,
+      transparent 1px, transparent 4px);
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.35),
+    inset 0 0 25px rgba(105,118,133,.1);
+}
 
-    #letterScreen.active {
-      display: flex;
-    }
+.letter-paper::before,
+.letter-paper::after {
+  position: absolute;
+  left: 50%;
+  color: #7187a5;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
 
-    #letterScreen.reveal {
-      opacity: 1;
-      pointer-events: auto;
-    }
+.letter-paper::before {
+  content: "✦  ·  ───────  ♡  ───────  ·  ✦";
+  top: 19px;
+  font-size: .7rem;
+  letter-spacing: .12em;
+}
 
-    .letter-paper {
-      position: relative;
-      width: min(100%, 600px);
-      margin: auto;
-      padding: clamp(25px, 7vw, 52px);
-      border: 1px solid rgba(255,255,255,.3);
-      border-radius: 3px;
-      color: var(--ink);
-      background-color: #dce7f5;
-      background-image:
-        radial-gradient(
-          ellipse at 12% 10%,
-          rgba(255,255,255,.75),
-          transparent 55%
-        ),
-        radial-gradient(
-          ellipse at 85% 90%,
-          rgba(106,137,178,.18),
-          transparent 60%
-        ),
-        repeating-linear-gradient(
-          0deg,
-          rgba(49,77,117,.035) 0px,
-          rgba(49,77,117,.035) 1px,
-          transparent 1px,
-          transparent 4px
-        );
-      box-shadow:
-        0 18px 55px rgba(0,0,0,.3),
-        0 2px 5px rgba(0,0,0,.15);
-    }
+.letter-paper::after {
+  content: "✦";
+  bottom: 14px;
+  font-size: .8rem;
+}
 
-    .letter-top {
-      margin: 0 0 24px;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      font-size: .7rem;
-      letter-spacing: .28em;
-      text-transform: uppercase;
-      opacity: .65;
-    }
+.letter-top {
+  margin: 25px 0 24px;
+  text-align: center;
+  font-size: .7rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .7;
+}
 
-    .letter-title {
-      margin: 0 0 25px;
-      font-size: clamp(1.7rem, 6vw, 2.5rem);
-      font-weight: normal;
-      text-align: center;
-      font-style: italic;
-    }
+.letter-title {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  font-weight: normal;
+  font-style: italic;
+}
 
-    .letter-body {
-      font-size: clamp(1rem, 3.5vw, 1.15rem);
-      line-height: 1.9;
-      white-space: pre-line;
-      overflow-wrap: anywhere;
-    }
+.letter-divider {
+  width: 70%;
+  height: 1px;
+  margin: 0 auto 25px;
+  background: linear-gradient(
+    to right, transparent, #879bb7, transparent
+  );
+}
 
-    .letter-signature {
-      margin-top: 28px;
-      text-align: right;
-      font-size: 1.25rem;
-      font-style: italic;
-    }
+.letter-body {
+  font-size: clamp(1rem, 3.5vw, 1.15rem);
+  line-height: 1.95;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
 
-    .letter-image-wrap {
-      display: flex;
-      justify-content: center;
-      margin: 30px auto 0;
-      width: 100%;
-    }
+.letter-signature {
+  margin-top: 30px;
+  text-align: right;
+  font-size: 1.3rem;
+  font-style: italic;
+}
 
-    .letter-image {
-      display: block;
-      max-width: 100%;
-      max-height: 360px;
-      object-fit: contain;
-      border-radius: 3px;
-    }
+/* Espacio reservado para la imagen */
 
-    .letter-footer {
-      margin: 25px 0 0;
-      text-align: center;
-      font-size: .8rem;
-      letter-spacing: .12em;
-      opacity: .65;
-    }
+.letter-image-wrap {
+  width: 100%;
+  margin: 32px auto 22px;
+  text-align: center;
+}
 
-    /* =====================================
-       OSCURECIMIENTO ENTRE LA FLOR Y LA CARTA
-       ===================================== */
+.image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 360px);
+  min-height: 200px;
+  margin: auto;
+  padding: 20px;
+  border: 1px dashed #899bb4;
+  outline: 1px solid rgba(137,155,180,.25);
+  outline-offset: 5px;
+  color: #647c9e;
+  background: rgba(255,255,255,.18);
+  text-align: center;
+}
 
-    #fadeOverlay {
-      position: fixed;
-      inset: 0;
-      z-index: 20;
-      background: #000;
-      opacity: 0;
-      pointer-events: none;
-    }
+.image-placeholder .placeholder-star {
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
 
-    #fadeOverlay.show {
-      animation: fadeToBlack .9s ease forwards;
-    }
+.image-placeholder p {
+  margin: 0;
+  font-size: .95rem;
+  font-style: italic;
+  line-height: 1.7;
+}
 
-    @keyframes fadeToBlack {
-      to {
-        opacity: 1;
-      }
-    }
+.letter-image {
+  display: none;
+  width: min(100%, 360px);
+  max-height: 420px;
+  margin: auto;
+  object-fit: contain;
+  padding: 9px;
+  border: 1px solid #b7b3a7;
+  background: #f0ede4;
+  box-shadow: 0 5px 15px rgba(44,54,69,.18);
+}
 
-    @keyframes riseIn {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
+.letter-footer {
+  margin: 25px 0 0;
+  text-align: center;
+  font-size: .7rem;
+  letter-spacing: .14em;
+  opacity: .7;
+}
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+/* ==================================
+   TRANSICIÓN OSCURA
+   ================================== */
 
-    @media (max-height: 560px) {
-      .intro-title {
-        font-size: clamp(2rem, 8vh, 3.5rem);
-      }
+#fadeOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+}
 
-      .intro-button {
-        width: 82px;
-        height: 82px;
-      }
+#fadeOverlay.show {
+  animation: fadeToBlack .9s ease forwards;
+}
 
-      .intro-decoration {
-        margin: 18px auto;
-      }
-    }
+@keyframes fadeToBlack {
+  to { opacity: 1; }
+}
 
-    @media (prefers-reduced-motion: reduce) {
-      .intro-content {
-        animation-duration: .01ms;
-      }
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-      .flower-word {
-        animation-duration: .01ms;
-      }
-    }
-  </style>
+@media (max-height: 560px) {
+  .intro-title { font-size: clamp(2rem, 8vh, 3.5rem); }
+  .intro-button { width: 82px; height: 82px; }
+  .intro-decoration { margin: 18px auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-content,
+  .flower-word {
+    animation-duration: .01ms;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- =====================================
-       PANTALLA 1: PORTADA
-       ===================================== -->
+<!-- PANTALLA 1: PORTADA -->
 
-  <main>
-    <section id="intro" class="screen active paper-texture">
-      <div class="intro-content">
-        <p class="intro-eyebrow">Para alguien especial</p>
+<section id="intro" class="screen active">
+  <div class="intro-content">
+    <p class="intro-eyebrow">Para alguien especial</p>
 
-        <h1 class="intro-title">
-          FELICES DOS MESES
-          <span>honey ♡</span>
-        </h1>
+    <h1 class="intro-title">
+      FELICES DOS MESES
+      <span>honey ♡</span>
+    </h1>
 
-        <div class="intro-decoration"></div>
+    <div class="intro-decoration"></div>
 
-        <button
-          id="startButton"
-          class="intro-button"
+    <button id="startButton" class="intro-button" type="button">
+      <span>click aquí</span>
+    </button>
+  </div>
+</section>
+
+<!-- PANTALLA 2: CORAZÓN -->
+
+<section id="heartScreen" class="screen">
+  <svg id="heartCanvas"
+       viewBox="0 0 1000 1000"
+       preserveAspectRatio="xMidYMid meet"
+       aria-hidden="true">
+    <path id="heartSpiral" d=""></path>
+  </svg>
+
+  <button id="toFlower"
+          class="heart-button"
           type="button"
-          aria-label="Comenzar"
-        >
-          <span>click aquí</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- =====================================
-         PANTALLA 2: ESPIRAL EN FORMA DE CORAZÓN
-         ===================================== -->
-
-    <section id="heartScreen" class="screen">
-      <svg
-        id="heartCanvas"
-        viewBox="0 0 1000 1000"
-        preserveAspectRatio="xMidYMid meet"
-        aria-hidden="true"
-      >
-        <path id="heartSpiral" d=""></path>
-      </svg>
-
-      <button
-        id="toFlower"
-        class="heart-button"
-        type="button"
-        aria-label="Abrir la flor"
-        hidden
-      >
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-          <path
-            d="M50 88
+          aria-label="Abrir la flor"
+          hidden>
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M50 88
                C43 80 8 57 8 32
                C8 11 34 4 50 25
                C66 4 92 11 92 32
-               C92 57 57 80 50 88 Z"
-          ></path>
-        </svg>
-      </button>
-    </section>
+               C92 57 57 80 50 88 Z"/>
+    </svg>
+  </button>
+</section>
 
-    <!-- =====================================
-         PANTALLA 3: FLOR DE PALABRAS
-         No se dibujan pétalos ni tallo:
-         la flor está hecha exclusivamente de texto.
-         ===================================== -->
+<!-- PANTALLA 3: FLOR DE PALABRAS -->
 
-    <section id="flowerScreen" class="screen">
-      <svg
-        id="flowerSvg"
-        viewBox="0 0 600 600"
-        role="img"
-        aria-label="Una flor formada por te amo en distintos idiomas"
-      ></svg>
-    </section>
+<section id="flowerScreen" class="screen">
+  <svg id="flowerSvg"
+       viewBox="0 0 600 600"
+       role="img"
+       aria-label="Flor formada por te amo en muchos idiomas">
+  </svg>
+</section>
 
-    <!-- =====================================
-         PANTALLA 4: CARTA
-         ===================================== -->
+<!-- PANTALLA 4: CARTA -->
 
-    <section id="letterScreen" class="screen">
-      <article class="letter-paper paper-texture">
-        <p class="letter-top">Para ti, con todo mi cariño</p>
+<section id="letterScreen" class="screen">
+  <article class="letter-paper">
+    <p class="letter-top">Para ti, con todo mi cariño</p>
 
-        <h2 class="letter-title">Mi amor ♡</h2>
+    <h2 class="letter-title">Mi amor ♡</h2>
+    <div class="letter-divider"></div>
 
-        <!-- EDITA AQUÍ EL TEXTO DE TU CARTA -->
-        <div id="letterBody" class="letter-body">Felices dos meses, honey.
+    <!-- CAMBIA AQUÍ EL TEXTO DE TU CARTA -->
+    <div id="letterBody" class="letter-body">Felices dos meses, honey.
 
 Gracias por formar parte de mi vida y por todos los momentos bonitos que compartimos. Me hace feliz conocerte cada día un poquito más y tener a alguien con quien compartir tantas pequeñas cosas.
 
@@ -607,493 +553,438 @@ Espero que este sea uno de muchos meses que nos queden por celebrar. Quiero segu
 
 Te amo muchísimo. 💙</div>
 
-        <p class="letter-signature">
-          Con amor ♡
-        </p>
+    <p class="letter-signature">Con amor ♡</p>
 
-        <!--
-          COLOCA TU IMAGEN FINAL EN LA MISMA CARPETA QUE index.html.
-          Después cambia "dibujo-final.png" por el nombre de tu archivo.
-        -->
-        <div class="letter-image-wrap">
-          <img
-            class="letter-image"
-            src="dibujo-final.png"
-            alt="Un dibujo hecho especialmente para ti"
-            onerror="this.style.display='none'"
-          >
-        </div>
+    <!-- TU IMAGEN APARECERÁ AQUÍ -->
+    <div class="letter-image-wrap">
+      <div id="imagePlaceholder" class="image-placeholder">
+        <span class="placeholder-star">✦ ♡ ✦</span>
+        <p>Aquí va algo bonito<br>hecho especialmente para ti</p>
+      </div>
 
-        <p class="letter-footer">
-          FELICES DOS MESES · SIEMPRE TÚ
-        </p>
-      </article>
-    </section>
-  </main>
+      <!-- Pon tu imagen junto a index.html y escribe aquí su nombre -->
+      <img id="finalImage"
+           class="letter-image"
+           src="dibujo-final.png"
+           alt="Un recuerdo bonito para ti">
+    </div>
 
-  <div id="fadeOverlay" aria-hidden="true"></div>
+    <p class="letter-footer">FELICES DOS MESES · SIEMPRE TÚ</p>
+  </article>
+</section>
 
-  <script>
-    /* =====================================
-       REFERENCIAS Y CONFIGURACIÓN
-       ===================================== */
+<div id="fadeOverlay" aria-hidden="true"></div>
 
-    const screens = document.querySelectorAll(".screen");
+<script>
+/* ==================================
+   CONFIGURACIÓN
+   ================================== */
 
-    const startButton = document.getElementById("startButton");
-    const heartButton = document.getElementById("toFlower");
-    const heartSpiral = document.getElementById("heartSpiral");
-    const flowerSvg = document.getElementById("flowerSvg");
-    const fadeOverlay = document.getElementById("fadeOverlay");
+const HEART_DRAW_TIME = 12000;
+const FLOWER_DRAW_TIME = 12000;
+const WAIT_AFTER_FLOWER = 2000;
 
-    const HEART_DRAW_TIME = 8000;
+const screens = document.querySelectorAll(".screen");
+const startButton = document.getElementById("startButton");
+const heartButton = document.getElementById("toFlower");
+const heartSpiral = document.getElementById("heartSpiral");
+const flowerSvg = document.getElementById("flowerSvg");
+const fadeOverlay = document.getElementById("fadeOverlay");
 
-    /*
-      La flor tarda aproximadamente 5.5 segundos en aparecer.
-      Esperamos un poco más para asegurarnos de que termine
-      y después dejamos pasar 2 segundos antes de oscurecer.
-    */
-    const FLOWER_DRAW_TIME = 5700;
-    const WAIT_AFTER_FLOWER = 2000;
+let flowerCreated = false;
+let transitionStarted = false;
 
-    let flowerCreated = false;
-    let transitionStarted = false;
+function showScreen(id) {
+  screens.forEach(screen => {
+    screen.classList.remove("active", "reveal");
+  });
 
-    function showScreen(id) {
-      screens.forEach(screen => {
-        screen.classList.remove("active");
-        screen.classList.remove("reveal");
-      });
+  document.getElementById(id).classList.add("active");
+}
 
-      document.getElementById(id).classList.add("active");
+/* ==================================
+   CORAZÓN: UNA LÍNEA CONTINUA
+   ================================== */
+
+function createHeartSpiral() {
+  const centerX = 500;
+  const centerY = 510;
+  const scaleX = 13.3;
+  const scaleY = 13.3;
+
+  const turns = 7.2;
+  const totalAngle = Math.PI * 2 * turns;
+  const steps = 4200;
+
+  let path = "";
+
+  for (let i = 0; i <= steps; i++) {
+    const progress = i / steps;
+    const t = progress * totalAngle;
+    const scale = 1 - 0.84 * progress;
+
+    const sinT = Math.sin(t);
+    const cosT = Math.cos(t);
+
+    const heartX = 16 * Math.pow(sinT, 3);
+    const heartY =
+      13 * cosT
+      - 5 * Math.cos(2 * t)
+      - 2 * Math.cos(3 * t)
+      - Math.cos(4 * t);
+
+    const x = centerX + heartX * scaleX * scale;
+    const y = centerY - heartY * scaleY * scale;
+
+    path += (i === 0 ? "M " : " L ")
+      + x.toFixed(2) + " "
+      + y.toFixed(2);
+  }
+
+  heartSpiral.setAttribute("d", path);
+
+  const length = heartSpiral.getTotalLength();
+
+  heartSpiral.style.setProperty("--path-length", length);
+  heartSpiral.style.strokeDasharray = length;
+  heartSpiral.style.strokeDashoffset = length;
+
+  heartSpiral.classList.remove("draw");
+  heartButton.hidden = true;
+  heartButton.classList.remove("visible");
+
+  requestAnimationFrame(() => {
+    heartSpiral.classList.add("draw");
+  });
+
+  setTimeout(() => {
+    heartButton.hidden = false;
+
+    requestAnimationFrame(() => {
+      heartButton.classList.add("visible");
+    });
+  }, HEART_DRAW_TIME + 200);
+}
+
+startButton.addEventListener("click", () => {
+  showScreen("heartScreen");
+  createHeartSpiral();
+});
+
+/* ==================================
+   FRASES DE AMOR EN DISTINTOS IDIOMAS
+   ================================== */
+
+const loveWords = [
+  "te amo",
+  "I love you",
+  "je t'aime",
+  "ti amo",
+  "ich liebe dich",
+  "eu te amo",
+  "te quiero",
+  "t'estimo",
+  "seni seviyorum",
+  "я тебя люблю",
+  "사랑해",
+  "愛してる",
+  "我爱你",
+  "σ' αγαπώ",
+  "kocham cię",
+  "miluji tě",
+  "ľúbim ťa",
+  "jag älskar dig",
+  "jeg elsker deg",
+  "jeg elsker dig",
+  "rakastan sinua",
+  "ik hou van jou",
+  "mahal kita",
+  "أحبك",
+  "te iubesc",
+  "volim te",
+  "ljubim te",
+  "szeretlek",
+  "amo-te",
+  "te quiero mucho",
+  "je t'adore",
+  "amo você",
+  "nakupenda",
+  "ngiyakuthanda",
+  "aku cinta kamu",
+  "aku sayang kamu",
+  "mahal na mahal kita",
+  "ti amo tanto",
+  "te amo muito",
+  "te dua",
+  "te iubesc mult",
+  "wo ai ni",
+  "saranghae",
+  "aishiteru",
+  "mi amas vin",
+  "mwen renmen ou",
+  "nalingi yo",
+  "ana behibak",
+  "ik hou van je",
+  "te amo siempre",
+  "te quiero tanto",
+  "amo-te muito",
+  "ti voglio bene",
+  "minä rakastan sinua",
+  "ya tebya lyublyu",
+  "ana uhibbuka",
+  "mahal kita palagi",
+  "te amo con todo mi corazón",
+  "I adore you",
+  "mon amour",
+  "amore mio",
+  "meu amor"
+];
+
+const petalColors = [
+  "#40101d",
+  "#521321",
+  "#651729",
+  "#781d31",
+  "#8c263a",
+  "#9d3447",
+  "#6e1b2c",
+  "#531421",
+  "#762039",
+  "#a13b4e",
+  "#873047",
+  "#5b1728"
+];
+
+const centerColors = [
+  "#17060d",
+  "#210711",
+  "#2a0915",
+  "#390d1c",
+  "#481124",
+  "#59162c",
+  "#310b19"
+];
+
+function createSvgText({
+  x, y, text, color, size, width = 48
+}) {
+  const node = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "text"
+  );
+
+  node.setAttribute("x", x);
+  node.setAttribute("y", y);
+  node.setAttribute("fill", color);
+  node.setAttribute("font-size", size);
+  node.setAttribute("text-anchor", "middle");
+  node.setAttribute("dominant-baseline", "middle");
+  node.setAttribute("textLength", width);
+  node.setAttribute("lengthAdjust", "spacingAndGlyphs");
+  node.classList.add("flower-word");
+  node.textContent = text;
+
+  return node;
+}
+
+/* ==================================
+   FLOR: LOS PÉTALOS APARECEN LENTAMENTE
+   ================================== */
+
+function createFlower() {
+  flowerSvg.replaceChildren();
+
+  const cx = 300;
+  const cy = 300;
+  const totalPetals = 10;
+  const wordsToCreate = [];
+
+  for (let p = 0; p < totalPetals; p++) {
+    const angle = p * (360 / totalPetals);
+
+    const group = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "g"
+    );
+
+    group.setAttribute(
+      "transform",
+      `rotate(${angle} ${cx} ${cy})`
+    );
+
+    const rows = 15;
+
+    for (let row = 0; row < rows; row++) {
+      const u = row / (rows - 1);
+      const radialDistance = 58 + u * 184;
+
+      const petalWidth =
+        47 * Math.pow(
+          Math.max(0, Math.sin(Math.PI * u)),
+          0.62
+        );
+
+      const y = cy - radialDistance;
+
+      for (
+        let xOffset = -petalWidth;
+        xOffset <= petalWidth;
+        xOffset += 30
+      ) {
+        const x = cx + xOffset;
+
+        const index = Math.abs(
+          p * 37 + row * 11 + Math.round(xOffset + 50)
+        ) % loveWords.length;
+
+        const colorIndex = Math.abs(
+          p * 3 + row + Math.round(xOffset + 50)
+        ) % petalColors.length;
+
+        const size = 11 + ((p + row) % 3) * .6;
+
+        const word = createSvgText({
+          x,
+          y,
+          text: loveWords[index],
+          color: petalColors[colorIndex],
+          size,
+          width: 48
+        });
+
+        group.appendChild(word);
+        wordsToCreate.push(word);
+      }
     }
 
-    /* =====================================
-       1. CREAR EL CORAZÓN ESPIRAL
-       Una única línea continua.
-       Cada vuelta se hace más pequeña,
-       formando capas con silueta de corazón.
-       ===================================== */
+    flowerSvg.appendChild(group);
+  }
 
-    function createHeartSpiral() {
-      const centerX = 500;
-      const centerY = 510;
-      const scaleX = 13.3;
-      const scaleY = 13.3;
+  /* Centro: también formado solo por palabras */
 
-      const turns = 7.2;
-      const totalAngle = Math.PI * 2 * turns;
-      const steps = 4200;
+  for (let row = -4; row <= 4; row++) {
+    const y = cy + row * 10;
+    const distanceFromCenter = Math.abs(row);
 
-      let path = "";
+    const halfWidth = Math.sqrt(
+      Math.max(0, 43 * 43 - (row * 10) ** 2)
+    );
 
-      for (let i = 0; i <= steps; i++) {
-        const progress = i / steps;
-        const t = progress * totalAngle;
+    for (
+      let xOffset = -halfWidth;
+      xOffset <= halfWidth;
+      xOffset += 25
+    ) {
+      const x = cx + xOffset;
 
-        /*
-          La escala disminuye gradualmente durante las vueltas.
-          Así se forma una sola línea en espiral, no varios
-          corazones separados.
-        */
-        const scale = 1 - 0.84 * progress;
+      const index = Math.abs(
+        row * 9 + Math.round(xOffset + 60)
+      ) % loveWords.length;
 
-        const sinT = Math.sin(t);
-        const cosT = Math.cos(t);
+      const colorIndex = Math.abs(
+        row + Math.round(xOffset + 60)
+      ) % centerColors.length;
 
-        const heartX = 16 * Math.pow(sinT, 3);
+      const word = createSvgText({
+        x,
+        y,
+        text: loveWords[index],
+        color: centerColors[colorIndex],
+        size: 10.5 + (4 - distanceFromCenter) * .3,
+        width: 44
+      });
 
-        const heartY =
-          13 * cosT
-          - 5 * Math.cos(2 * t)
-          - 2 * Math.cos(3 * t)
-          - Math.cos(4 * t);
+      flowerSvg.appendChild(word);
+      wordsToCreate.push(word);
+    }
+  }
 
-        const x = centerX + heartX * scaleX * scale;
-        const y = centerY - heartY * scaleY * scale;
+  /*
+    Repartimos la aparición durante 11 segundos.
+    Primero se va formando cada pétalo y al final
+    aparece el centro, como una flor que florece.
+  */
 
-        path += (i === 0 ? "M " : " L ")
-          + x.toFixed(2) + " "
-          + y.toFixed(2);
-      }
+  const lastDelay = 11000;
+  const lastIndex = Math.max(1, wordsToCreate.length - 1);
 
-      heartSpiral.setAttribute("d", path);
+  wordsToCreate.forEach((word, index) => {
+    word.style.animationDelay =
+      ((index / lastIndex) * lastDelay).toFixed(0) + "ms";
+  });
 
-      const length = heartSpiral.getTotalLength();
+  flowerCreated = true;
+}
 
-      heartSpiral.style.setProperty(
-        "--path-length",
-        length
-      );
+/* ==================================
+   TRANSICIÓN A LA CARTA
+   ================================== */
 
-      heartSpiral.style.strokeDasharray = length;
-      heartSpiral.style.strokeDashoffset = length;
+function revealLetter() {
+  if (transitionStarted) return;
+  transitionStarted = true;
 
-      heartSpiral.classList.remove("draw");
-      heartButton.hidden = true;
-      heartButton.classList.remove("visible");
+  setTimeout(() => {
+    fadeOverlay.classList.remove("show");
+    void fadeOverlay.offsetWidth;
+    fadeOverlay.classList.add("show");
+
+    setTimeout(() => {
+      showScreen("letterScreen");
 
       requestAnimationFrame(() => {
-        heartSpiral.classList.add("draw");
-      });
-
-      setTimeout(() => {
-        heartButton.hidden = false;
-
         requestAnimationFrame(() => {
-          heartButton.classList.add("visible");
+          document
+            .getElementById("letterScreen")
+            .classList.add("reveal");
         });
-      }, HEART_DRAW_TIME + 150);
-    }
-
-    startButton.addEventListener("click", () => {
-      showScreen("heartScreen");
-      createHeartSpiral();
-    });
-
-    /* =====================================
-       2. PALABRAS DE AMOR EN VARIOS IDIOMAS
-       ===================================== */
-
-    const loveWords = [
-      "te amo",
-      "I love you",
-      "je t'aime",
-      "ti amo",
-      "ich liebe dich",
-      "eu te amo",
-      "te quiero",
-      "t'estimo",
-      "seni seviyorum",
-      "я тебя люблю",
-      "사랑해",
-      "愛してる",
-      "我爱你",
-      "σ' αγαπώ",
-      "kocham cię",
-      "miluji tě",
-      "ľúbim ťa",
-      "jag älskar dig",
-      "jeg elsker deg",
-      "jeg elsker dig",
-      "rakastan sinua",
-      "ik hou van jou",
-      "mahal kita",
-      "أحبك",
-      "मैं तुमसे प्यार करता हूँ",
-      "te iubesc",
-      "volim te",
-      "ljubim te",
-      "szeretlek",
-      "amo-te",
-      "te amo muito",
-      "ya tebya lyublyu",
-      "të dua",
-      "mi amas vin",
-      "kocham ciebie",
-      "ana behibak",
-      "t'estimo molt",
-      "minä rakastan sinua",
-      "ti voglio bene",
-      "te iubesc mult",
-      "aishiteru",
-      "saranghae",
-      "wo ai ni",
-      "nakupenda",
-      "ngiyakuthanda",
-      "nalingi yo",
-      "ik hou van je",
-      "te dua shumë",
-      "mwen renmen ou",
-      "aku cinta kamu",
-      "aku sayang kamu",
-      "mahal na mahal kita",
-      "saya cinta padamu",
-      "kocham cię bardzo",
-      "jeg elsker dig højt",
-      "te quiero mucho",
-      "je t'adore",
-      "amo você",
-      "eu gosto de ti",
-      "ya lyublyu tebya",
-      "ana uhibbuka",
-      "main tumse pyar karta hoon",
-      "ti amo tanto"
-    ];
-
-    const petalColors = [
-      "#40101d",
-      "#521321",
-      "#651729",
-      "#781d31",
-      "#8c263a",
-      "#9d3447",
-      "#6e1b2c",
-      "#531421",
-      "#762039",
-      "#a13b4e",
-      "#873047",
-      "#5b1728"
-    ];
-
-    const centerColors = [
-      "#17060d",
-      "#210711",
-      "#2a0915",
-      "#390d1c",
-      "#481124",
-      "#59162c",
-      "#310b19"
-    ];
-
-    function createSvgText({
-      x,
-      y,
-      text,
-      color,
-      size,
-      delay,
-      rotation = 0,
-      width = 43
-    }) {
-      const node = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "text"
-      );
-
-      node.setAttribute("x", x);
-      node.setAttribute("y", y);
-      node.setAttribute("fill", color);
-      node.setAttribute("font-size", size);
-      node.setAttribute("text-anchor", "middle");
-      node.setAttribute("dominant-baseline", "middle");
-      node.setAttribute("textLength", width);
-      node.setAttribute("lengthAdjust", "spacingAndGlyphs");
-
-      if (rotation !== 0) {
-        node.setAttribute(
-          "transform",
-          `rotate(${rotation} ${x} ${y})`
-        );
-      }
-
-      node.classList.add("flower-word");
-      node.style.animationDelay = delay + "ms";
-      node.textContent = text;
-
-      return node;
-    }
-
-    /* =====================================
-       3. FORMAR LOS PÉTALOS CON PALABRAS
-       No hay dibujos debajo del texto.
-       Solo se crean elementos <text>.
-       ===================================== */
-
-    function createFlower() {
-      flowerSvg.replaceChildren();
-
-      const cx = 300;
-      const cy = 300;
-
-      const totalPetals = 10;
-      const wordsToCreate = [];
-
-      /*
-        Cada pétalo se forma con filas de palabras.
-        El ancho aumenta hacia la parte central del pétalo
-        y disminuye en la punta, creando una silueta floral.
-      */
-
-      for (let p = 0; p < totalPetals; p++) {
-        const angle = p * (360 / totalPetals);
-
-        const group = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "g"
-        );
-
-        group.setAttribute(
-          "transform",
-          `rotate(${angle} ${cx} ${cy})`
-        );
-
-        const rows = 15;
-
-        for (let row = 0; row < rows; row++) {
-          const u = row / (rows - 1);
-
-          const radialDistance = 58 + u * 184;
-
-          const petalWidth =
-            43 * Math.pow(
-              Math.max(0, Math.sin(Math.PI * u)),
-              0.62
-            );
-
-          const y = cy - radialDistance;
-
-          for (
-            let xOffset = -petalWidth;
-            xOffset <= petalWidth;
-            xOffset += 27
-          ) {
-            const x = cx + xOffset;
-
-            /*
-              Se alternan palabras y tonos para que
-              la flor no parezca una figura plana.
-            */
-
-            const index =
-              (p * 37 + row * 11
-              + Math.round(xOffset + 50)) % loveWords.length;
-
-            const colorIndex =
-              (p * 3 + row
-              + Math.round(xOffset + 50)) % petalColors.length;
-
-            const size =
-              9.2 + ((p + row) % 3) * 0.65;
-
-            const word = createSvgText({
-              x,
-              y,
-              text: loveWords[index],
-              color: petalColors[colorIndex],
-              size,
-              delay: 0,
-              width: 42
-            });
-
-            group.appendChild(word);
-            wordsToCreate.push(word);
-          }
-        }
-
-        flowerSvg.appendChild(group);
-      }
-
-      /* =====================================
-         CENTRO DE LA FLOR
-         También está hecho solo de palabras.
-         ===================================== */
-
-      for (let row = -4; row <= 4; row++) {
-        const y = cy + row * 10;
-        const distanceFromCenter = Math.abs(row);
-
-        const halfWidth = Math.sqrt(
-          Math.max(0, 43 * 43 - (row * 10) ** 2)
-        );
-
-        for (
-          let xOffset = -halfWidth;
-          xOffset <= halfWidth;
-          xOffset += 25
-        ) {
-          const x = cx + xOffset;
-
-          const index = Math.abs(
-            row * 9 + Math.round(xOffset + 60)
-          ) % loveWords.length;
-
-          const colorIndex = Math.abs(
-            row + Math.round(xOffset + 60)
-          ) % centerColors.length;
-
-          const word = createSvgText({
-            x,
-            y,
-            text: loveWords[index],
-            color: centerColors[colorIndex],
-            size: 9.5 + (4 - distanceFromCenter) * 0.25,
-            delay: 0,
-            width: 42
-          });
-
-          flowerSvg.appendChild(word);
-          wordsToCreate.push(word);
-        }
-      }
-
-      /*
-        Distribuimos la aparición de las palabras
-        durante varios segundos, como si la flor
-        se estuviera escribiendo poco a poco.
-      */
-
-      const lastDelay = 4900;
-      const lastIndex = Math.max(1, wordsToCreate.length - 1);
-
-      wordsToCreate.forEach((word, index) => {
-        const delay = (index / lastIndex) * lastDelay;
-        word.style.animationDelay = delay.toFixed(0) + "ms";
       });
-
-      flowerCreated = true;
-    }
-
-    /* =====================================
-       4. TRANSICIÓN: FLOR → OSCURIDAD → CARTA
-       ===================================== */
-
-    function revealLetter() {
-      if (transitionStarted) return;
-      transitionStarted = true;
-
-      /*
-        La flor termina de aparecer.
-        Esperamos 2 segundos y luego oscurecemos
-        la pantalla antes de revelar la carta.
-      */
 
       setTimeout(() => {
         fadeOverlay.classList.remove("show");
+        transitionStarted = false;
+      }, 1600);
 
-        // Reinicia la animación de oscurecimiento.
-        void fadeOverlay.offsetWidth;
+    }, 900);
 
-        fadeOverlay.classList.add("show");
+  }, FLOWER_DRAW_TIME + WAIT_AFTER_FLOWER);
+}
 
-        setTimeout(() => {
-          showScreen("letterScreen");
+heartButton.addEventListener("click", () => {
+  if (flowerCreated) flowerCreated = false;
 
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              document
-                .getElementById("letterScreen")
-                .classList.add("reveal");
-            });
-          });
+  transitionStarted = false;
+  showScreen("flowerScreen");
+  createFlower();
+  revealLetter();
+});
 
-          /*
-            La carta ya está apareciendo detrás
-            de la capa oscura. Retiramos esa capa
-            cuando termina la transición.
-          */
+/* ==================================
+   IMAGEN FINAL: MOSTRARLA SI EXISTE
+   ================================== */
 
-          setTimeout(() => {
-            fadeOverlay.classList.remove("show");
-            transitionStarted = false;
-          }, 1300);
+const finalImage = document.getElementById("finalImage");
+const imagePlaceholder = document.getElementById("imagePlaceholder");
 
-        }, 900);
+function showFinalImage() {
+  finalImage.style.display = "block";
+  imagePlaceholder.style.display = "none";
+}
 
-      }, FLOWER_DRAW_TIME + WAIT_AFTER_FLOWER);
-    }
+function showImagePlaceholder() {
+  finalImage.style.display = "none";
+  imagePlaceholder.style.display = "flex";
+}
 
-    heartButton.addEventListener("click", () => {
-      if (flowerCreated) {
-        flowerCreated = false;
-      }
+finalImage.addEventListener("load", showFinalImage);
+finalImage.addEventListener("error", showImagePlaceholder);
 
-      transitionStarted = false;
+/* Por si el navegador ya cargó la imagen */
 
-      showScreen("flowerScreen");
-      createFlower();
-      revealLetter();
-    });
-  </script>
+if (finalImage.complete && finalImage.naturalWidth > 0) {
+  showFinalImage();
+}
+</script>
+
 </body>
 </html>
