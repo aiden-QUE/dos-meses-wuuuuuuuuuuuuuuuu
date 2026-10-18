@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10080d">
+  <title>Un corazón para ti</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at center, #29101d 0%, #10080d 65%);
+      color: #fff0f3;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .scene {
+      width: 100%;
+      max-width: 560px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 30px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: #dba3b4;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 15px 0 0;
+      font-size: clamp(30px, 8vw, 43px);
+      font-weight: normal;
+    }
+
+    .subtitle {
+      color: #bd9ba7;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .heart-container {
+      width: 100%;
+      max-width: 390px;
+      margin: 12px 0;
+      position: relative;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      overflow: visible;
+    }
+
+    #heart {
+      fill: none;
+      stroke: #ff365d;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 5px #ff174f)
+              drop-shadow(0 0 15px #b80037);
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+
+    #heart.drawing {
+      animation: drawHeart 5s ease-in-out forwards;
+    }
+
+    @keyframes drawHeart {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .sparkle {
+      fill: #ffb3c4;
+      opacity: 0;
+      filter: drop-shadow(0 0 5px #ff6d91);
+    }
+
+    .sparkle.show {
+      animation: twinkle 1.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from {
+        opacity: .2;
+        transform: scale(.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+    }
+
+    .message {
+      min-height: 76px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 1.5s ease, transform 1.5s ease;
+    }
+
+    .message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .message p {
+      font-size: 20px;
+      line-height: 1.5;
+      margin: 8px 0;
+    }
+
+    .signature {
+      color: #e88ca5;
+      font-size: 14px !important;
+    }
+
+    button {
+      margin-top: 18px;
+      padding: 13px 25px;
+      border: 1px solid #a83b5b;
+      border-radius: 30px;
+      background: #481629;
+      color: #ffe8ee;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+
+    button:hover {
+      background: #69213c;
+    }
+
+    button:active {
+      transform: scale(.96);
+    }
+
+    .footer {
+      margin-top: 25px;
+      color: #76505f;
+      font: 11px Arial, sans-serif;
+      letter-spacing: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="scene">
+    <div class="eyebrow">Algo hecho para ti</div>
+
+    <h1>Un pequeño corazón</h1>
+
+    <p class="subtitle">
+      A veces, las cosas más bonitas<br>
+      comienzan con una sola línea.
+    </p>
+
+    <div class="heart-container">
+      <svg viewBox="0 0 300 280"
+           role="img"
+           aria-label="Un corazón rojo dibujado progresivamente">
+
+        <path id="heart"
+          d="M150 247
+             C133 231 27 163 27 91
+             C27 27 109 14 150 76
+             C191 14 273 27 273 91
+             C273 163 167 231 150 247 Z"/>
+
+        <circle class="sparkle" cx="45" cy="72" r="2.5"/>
+        <circle class="sparkle" cx="248" cy="51" r="3"/>
+        <circle class="sparkle" cx="230" cy="200" r="2"/>
+        <circle class="sparkle" cx="68" cy="188" r="2.5"/>
+        <circle class="sparkle" cx="150" cy="15" r="2"/>
+      </svg>
+    </div>
+
+    <section class="message" id="message" aria-live="polite">
+      <p>Incluso una línea puede encontrar su camino hasta ti.</p>
+      <p class="signature">Hecho con cariño ♡</p>
+    </section>
+
+    <button id="replay" type="button">
+      Dibujar otra vez ↻
+    </button>
+
+    <div class="footer">UNA LÍNEA · UN CORAZÓN</div>
+  </main>
+
+  <script>
+    const heart = document.getElementById("heart");
+    const message = document.getElementById("message");
+    const replay = document.getElementById("replay");
+    const sparkles = document.querySelectorAll(".sparkle");
+
+    function draw() {
+      // Reinicia el dibujo desde el principio.
+      heart.classList.remove("drawing");
+      message.classList.remove("show");
+
+      sparkles.forEach(s => s.classList.remove("show"));
+
+      // Calcula la longitud real del contorno.
+      const length = heart.getTotalLength();
+
+      heart.style.strokeDasharray = length;
+      heart.style.strokeDashoffset = length;
+
+      // Fuerza al navegador a reiniciar la animación.
+      void heart.getBoundingClientRect();
+
+      heart.classList.add("drawing");
+
+      heart.addEventListener("animationend", function finish() {
+        heart.removeEventListener("animationend", finish);
+
+        message.classList.add("show");
+        sparkles.forEach(s => s.classList.add("show"));
+      }, { once: true });
+    }
+
+    replay.addEventListener("click", draw);
+
+    draw();
+  </script>
+</body>
+</html>
