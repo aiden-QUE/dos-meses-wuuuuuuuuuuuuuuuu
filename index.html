@@ -2,256 +2,799 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#10080d">
-  <title>Un corazón para ti</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#526b91">
+<title>Felices dos meses, honey 💙</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+:root {
+  --blue: #8ba3c5;
+  --mid: #526b91;
+  --deep: #253653;
+  --navy: #101b32;
+  --paper: #e5eaf2;
+  --ink: #263957;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow-x: hidden;
-      background:
-        radial-gradient(ellipse at center, #29101d 0%, #10080d 65%);
-      color: #fff0f3;
-      font-family: Georgia, "Times New Roman", serif;
-    }
+* { box-sizing: border-box; }
 
-    .scene {
-      width: 100%;
-      max-width: 560px;
-      min-height: 100vh;
-      min-height: 100dvh;
-      padding: 30px 22px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--navy);
+}
 
-    .eyebrow {
-      color: #dba3b4;
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-    }
+body {
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  overflow: hidden;
+}
 
-    h1 {
-      margin: 15px 0 0;
-      font-size: clamp(30px, 8vw, 43px);
-      font-weight: normal;
-    }
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
 
-    .subtitle {
-      color: #bd9ba7;
-      font-size: 15px;
-      line-height: 1.7;
-    }
+.screen.active {
+  display: flex;
+  animation: screenIn 1s ease both;
+}
 
-    .heart-container {
-      width: 100%;
-      max-width: 390px;
-      margin: 12px 0;
-      position: relative;
-    }
+@keyframes screenIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
-    svg {
-      display: block;
-      width: 100%;
-      overflow: visible;
-    }
+/* PAPEL: textura hecha con CSS, sin imágenes externas */
 
-    #heart {
-      fill: none;
-      stroke: #ff365d;
-      stroke-width: 2.4;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      filter: drop-shadow(0 0 5px #ff174f)
-              drop-shadow(0 0 15px #b80037);
-      stroke-dasharray: 1;
-      stroke-dashoffset: 1;
-    }
+.paper {
+  background-color: #dce5f0;
+  background-image:
+    radial-gradient(ellipse at 20% 15%,
+      #ffffff70 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 85%,
+      #8ca4c526 0%, transparent 55%),
+    repeating-linear-gradient(
+      0deg,
+      #526b9105 0px,
+      #526b9105 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  box-shadow:
+    inset 0 0 35px #526b9118,
+    0 12px 50px #07101d45;
+}
 
-    #heart.drawing {
-      animation: drawHeart 5s ease-in-out forwards;
-    }
+/* PORTADA */
 
-    @keyframes drawHeart {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
+#intro {
+  background:
+    radial-gradient(ellipse at top, #8ba3c5, transparent 75%),
+    linear-gradient(150deg, #526b91, #293b5b);
+}
 
-    .sparkle {
-      fill: #ffb3c4;
-      opacity: 0;
-      filter: drop-shadow(0 0 5px #ff6d91);
-    }
+.cover {
+  width: min(100%, 410px);
+  padding: 44px 24px;
+  text-align: center;
+  border: 1px solid #ffffff80;
+  border-radius: 4px;
+  position: relative;
+}
 
-    .sparkle.show {
-      animation: twinkle 1.8s ease-in-out infinite alternate;
-    }
+.cover::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #526b9140;
+  pointer-events: none;
+}
 
-    @keyframes twinkle {
-      from {
-        opacity: .2;
-        transform: scale(.8);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1.15);
-      }
-    }
+.eyebrow {
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #405676;
+}
 
-    .message {
-      min-height: 76px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 1.5s ease, transform 1.5s ease;
-    }
+h1 {
+  font-size: clamp(29px, 8vw, 43px);
+  line-height: 1.3;
+  font-weight: normal;
+  margin: 28px 0 14px;
+}
 
-    .message.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.cover p {
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.8;
+}
 
-    .message p {
-      font-size: 20px;
-      line-height: 1.5;
-      margin: 8px 0;
-    }
+.round-button {
+  width: 105px;
+  height: 105px;
+  margin-top: 25px;
+  border: 1px solid #e7edf8;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #627fa9, #30476b);
+  color: #f5f7fc;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  box-shadow: 0 0 0 7px #ffffff20;
+  cursor: pointer;
+  transition: transform .3s, box-shadow .3s;
+}
 
-    .signature {
-      color: #e88ca5;
-      font-size: 14px !important;
-    }
+.round-button:active {
+  transform: scale(.94);
+}
 
-    button {
-      margin-top: 18px;
-      padding: 13px 25px;
-      border: 1px solid #a83b5b;
-      border-radius: 30px;
-      background: #481629;
-      color: #ffe8ee;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background .2s, transform .2s;
-    }
+/* CORAZONES */
 
-    button:hover {
-      background: #69213c;
-    }
+#hearts {
+  background:
+    radial-gradient(ellipse at center, #263c60, #0c1528 85%);
+  padding: 0;
+  overflow: hidden;
+}
 
-    button:active {
-      transform: scale(.96);
-    }
+#heartCanvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
 
-    .footer {
-      margin-top: 25px;
-      color: #76505f;
-      font: 11px Arial, sans-serif;
-      letter-spacing: 2px;
-    }
+.drawn-heart {
+  fill: none;
+  stroke: #8ba3c5;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 5px #7ca8ed90);
+  stroke-dasharray: var(--length);
+  stroke-dashoffset: var(--length);
+  animation: heartDraw 2.4s ease-in-out forwards;
+  animation-delay: var(--delay);
+}
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
+@keyframes heartDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+.center-heart {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border: 1px solid #526b91;
+  background: #101b32;
+  color: #d9e6fa;
+  font-size: 37px;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(.6);
+  transition: opacity 1s, transform 1s;
+  filter: drop-shadow(0 0 15px #718fb955);
+  clip-path: polygon(
+    50% 92%, 9% 55%, 3% 38%, 6% 23%,
+    18% 10%, 34% 8%, 50% 24%,
+    66% 8%, 82% 10%, 94% 23%,
+    97% 38%, 91% 55%
+  );
+}
+
+.center-heart.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* FLOR */
+
+#flowerScreen {
+  background:
+    radial-gradient(ellipse at center, #526b9140, transparent 65%),
+    linear-gradient(150deg, #192943, #080f1d);
+  color: #e0e8f6;
+  overflow-y: auto;
+}
+
+.flower-layout {
+  width: min(100%, 560px);
+  text-align: center;
+  padding: 15px 0 25px;
+}
+
+.flower-title {
+  font-size: clamp(24px, 6vw, 34px);
+  font-weight: normal;
+  margin: 0 0 8px;
+}
+
+.flower-caption {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #b6c7df;
+  font-style: italic;
+}
+
+#flowerSvg {
+  width: 100%;
+  max-height: 68vh;
+  display: block;
+  overflow: visible;
+  margin: 0 auto;
+}
+
+.stem {
+  fill: none;
+  stroke: #617e86;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: stemGrow 2.5s ease forwards;
+}
+
+.leaf {
+  fill: #395c59;
+  stroke: #75968a;
+  stroke-width: 1.5;
+  opacity: 0;
+  animation: leafAppear 1.2s ease forwards;
+  animation-delay: 1.7s;
+}
+
+@keyframes stemGrow {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes leafAppear {
+  to { opacity: 1; }
+}
+
+.petal {
+  fill: url(#petalGradient);
+  stroke: #8e5264;
+  stroke-width: 1.4;
+  opacity: 0;
+  transform-box: view-box;
+  transform-origin: 300px 290px;
+  animation: petalOpen 1.5s cubic-bezier(.2,.7,.2,1) forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes petalOpen {
+  from {
+    opacity: 0;
+    transform: scale(.08) rotate(-7deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+.petal-words {
+  fill: #f0dce2;
+  font-family: Georgia, serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  opacity: 0;
+  animation: wordsAppear 1.5s ease forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes wordsAppear {
+  to { opacity: .94; }
+}
+
+.flower-center {
+  fill: #30212b;
+  stroke: #c39a65;
+  stroke-width: 3;
+  opacity: 0;
+  animation: wordsAppear 1s ease forwards;
+  animation-delay: 3s;
+}
+
+.center-detail {
+  fill: #d3ae70;
+  opacity: 0;
+  animation: wordsAppear 1s ease forwards;
+  animation-delay: 3.2s;
+}
+
+/* CARTA */
+
+#letterScreen {
+  background: #111b2d;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+#letterScreen.active {
+  display: flex;
+  animation: none;
+}
+
+#letterScreen.reveal {
+  opacity: 1;
+}
+
+.letter-paper {
+  width: min(100%, 450px);
+  max-height: 88dvh;
+  overflow-y: auto;
+  padding: 35px 27px;
+  position: relative;
+  transform: translateY(15px);
+  transition: transform 1s ease;
+}
+
+.reveal .letter-paper {
+  transform: translateY(0);
+}
+
+.letter-paper h2 {
+  font-size: 29px;
+  font-weight: normal;
+  text-align: center;
+  margin: 0 0 25px;
+}
+
+.letter-text {
+  font-size: 16px;
+  line-height: 1.95;
+  white-space: pre-line;
+}
+
+.letter-signature {
+  text-align: right;
+  font-style: italic;
+  margin-top: 25px;
+  font-size: 18px;
+}
+
+.final-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 28px;
+  border: 1px solid #8ba3c560;
+}
+
+/* ACCESIBILIDAD */
+
+button:focus-visible {
+  outline: 3px solid #d8e8ff;
+  outline-offset: 5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
 </head>
 
 <body>
-  <main class="scene">
-    <div class="eyebrow">Algo hecho para ti</div>
 
-    <h1>Un pequeño corazón</h1>
+<!-- PANTALLA 1: PORTADA -->
 
-    <p class="subtitle">
-      A veces, las cosas más bonitas<br>
-      comienzan con una sola línea.
+<section id="intro" class="screen active">
+  <div class="cover paper">
+    <div class="eyebrow">PARA MI PERSONA FAVORITA</div>
+
+    <h1>FELICES DOS<br>MESES HONEY</h1>
+
+    <p>
+      Dos meses de nosotros,<br>
+      y todavía tengo tantas cosas<br>
+      bonitas que darte.
     </p>
 
-    <div class="heart-container">
-      <svg viewBox="0 0 300 280"
-           role="img"
-           aria-label="Un corazón rojo dibujado progresivamente">
+    <button id="startButton" class="round-button">
+      click aquí
+    </button>
+  </div>
+</section>
 
-        <path id="heart"
-          d="M150 247
-             C133 231 27 163 27 91
-             C27 27 109 14 150 76
-             C191 14 273 27 273 91
-             C273 163 167 231 150 247 Z"/>
 
-        <circle class="sparkle" cx="45" cy="72" r="2.5"/>
-        <circle class="sparkle" cx="248" cy="51" r="3"/>
-        <circle class="sparkle" cx="230" cy="200" r="2"/>
-        <circle class="sparkle" cx="68" cy="188" r="2.5"/>
-        <circle class="sparkle" cx="150" cy="15" r="2"/>
-      </svg>
+<!-- PANTALLA 2: ESPIRAL DE CORAZONES -->
+
+<section id="hearts" class="screen">
+  <svg id="heartCanvas"
+       viewBox="0 0 1000 1000"
+       preserveAspectRatio="xMidYMid slice"
+       aria-label="Un espiral de corazones dibujados en azul">
+  </svg>
+
+  <button id="toFlower" class="center-heart"
+          aria-label="Continuar a la flor">
+    ♥
+  </button>
+</section>
+
+
+<!-- PANTALLA 3: CHOCOLATE COSMOS -->
+
+<section id="flowerScreen" class="screen">
+  <div class="flower-layout">
+    <h2 class="flower-title">Para ti, mi amor</h2>
+
+    <p class="flower-caption">
+      Si pudiera convertir cada manera de decir te amo
+      en una flor, te regalaría un jardín entero.
+    </p>
+
+    <svg id="flowerSvg"
+         viewBox="0 0 600 650"
+         role="img"
+         aria-label="Flor chocolate cosmos formada por te amo en distintos idiomas">
+
+      <defs>
+        <radialGradient id="petalGradient"
+                        cx="40%" cy="35%" r="75%">
+          <stop offset="0%" stop-color="#9d5a70"/>
+          <stop offset="40%" stop-color="#713349"/>
+          <stop offset="75%" stop-color="#482031"/>
+          <stop offset="100%" stop-color="#281522"/>
+        </radialGradient>
+
+        <radialGradient id="centerGradient">
+          <stop offset="0%" stop-color="#d3ae70"/>
+          <stop offset="70%" stop-color="#79543b"/>
+          <stop offset="100%" stop-color="#30212b"/>
+        </radialGradient>
+
+        <path id="petalShape"
+          d="M 300,290
+             C 248,270 220,220 237,158
+             C 249,111 275,75 300,60
+             C 325,75 351,111 363,158
+             C 380,220 352,270 300,290 Z"/>
+
+        <path id="petalTextPath"
+          d="M 300,273
+             C 274,235 268,183 300,94
+             C 332,183 326,235 300,273"/>
+      </defs>
+
+      <!-- Tallo y hojas -->
+
+      <path class="stem"
+        d="M300 290 C302 365 288 445 305 565"/>
+
+      <path class="leaf"
+        d="M300 420
+           C250 395 210 405 198 440
+           C240 449 274 442 300 420 Z"/>
+
+      <path class="leaf"
+        d="M300 470
+           C340 425 383 430 402 451
+           C373 478 335 481 300 470 Z"/>
+
+      <path class="leaf"
+        d="M301 520
+           C263 500 237 512 228 533
+           C253 546 282 538 301 520 Z"/>
+
+      <!-- La flor se construye mediante JavaScript -->
+
+      <g id="petals"></g>
+      <g id="flowerCenter"></g>
+    </svg>
+
+    <p class="flower-caption">
+      En todos los idiomas que conozco,<br>
+      de todas las formas que puedo imaginar,<br>
+      siempre termino diciéndote lo mismo.
+    </p>
+  </div>
+</section>
+
+
+<!-- PANTALLA 4: CARTA FINAL -->
+
+<section id="letterScreen" class="screen">
+  <article class="letter-paper paper">
+    <div class="eyebrow" style="text-align:center">
+      DOS MESES CONTIGO
     </div>
 
-    <section class="message" id="message" aria-live="polite">
-      <p>Incluso una línea puede encontrar su camino hasta ti.</p>
-      <p class="signature">Hecho con cariño ♡</p>
-    </section>
+    <h2>Mi honey 💙</h2>
 
-    <button id="replay" type="button">
-      Dibujar otra vez ↻
-    </button>
+    <div id="letterText" class="letter-text">Felices dos meses, mi amor.
 
-    <div class="footer">UNA LÍNEA · UN CORAZÓN</div>
-  </main>
+No sé si las palabras me alcancen para explicarte lo mucho que significas para mí, pero quiero seguir intentándolo. Gracias por formar parte de mis días, por compartir conmigo tus historias y por dejarme conocer poquito a poquito más de ti.
 
-  <script>
-    const heart = document.getElementById("heart");
-    const message = document.getElementById("message");
-    const replay = document.getElementById("replay");
-    const sparkles = document.querySelectorAll(".sparkle");
+Me gusta que podamos construir algo que sea nuestro, con nuestras pequeñas costumbres, nuestras tonterías y todos esos momentos que quizá parezcan simples, pero que para mí tienen un valor enorme.
 
-    function draw() {
-      // Reinicia el dibujo desde el principio.
-      heart.classList.remove("drawing");
-      message.classList.remove("show");
+Quiero seguir conociéndote, escuchándote, riéndome contigo y acompañándote mientras los dos crecemos. No necesito que cada día sea perfecto; me basta con que podamos seguir construyendo algo sincero, bonito y nuestro.
 
-      sparkles.forEach(s => s.classList.remove("show"));
+Estos dos meses son una pequeña parte de todo lo que todavía nos queda por vivir, y me hace ilusión pensar en los recuerdos que aún nos esperan.
 
-      // Calcula la longitud real del contorno.
-      const length = heart.getTotalLength();
+Te amo, mi honey. Gracias por estos dos meses. 💙</div>
 
-      heart.style.strokeDasharray = length;
-      heart.style.strokeDashoffset = length;
+    <p class="letter-signature">
+      Con todo mi cariño,<br>
+      tu persona favorita ♡
+    </p>
 
-      // Fuerza al navegador a reiniciar la animación.
-      void heart.getBoundingClientRect();
+    <!-- Pon tu imagen en la misma carpeta y cambia su nombre aquí -->
 
-      heart.classList.add("drawing");
+    <img class="final-image"
+         src="nuestro-dibujo.png"
+         alt="Un dibujo especial para nosotros"
+         onerror="this.style.display='none'">
+  </article>
+</section>
 
-      heart.addEventListener("animationend", function finish() {
-        heart.removeEventListener("animationend", finish);
 
-        message.classList.add("show");
-        sparkles.forEach(s => s.classList.add("show"));
-      }, { once: true });
+<script>
+/* ======================================
+   CONFIGURACIÓN PERSONALIZABLE
+====================================== */
+
+const CONFIG = {
+  heartCount: 36,
+  heartDrawingDuration: 2400,
+
+  // Cambia el texto de la carta aquí.
+  // También puedes editarlo directamente en #letterText.
+
+  imageFile: "nuestro-dibujo.png"
+};
+
+
+/* ======================================
+   CAMBIO DE PANTALLAS
+====================================== */
+
+const screens = document.querySelectorAll(".screen");
+
+function showScreen(id) {
+  screens.forEach(screen => {
+    screen.classList.remove("active");
+  });
+
+  const next = document.getElementById(id);
+  next.classList.add("active");
+
+  window.scrollTo(0, 0);
+}
+
+
+/* ======================================
+   ESPIRAL DE CORAZONES
+====================================== */
+
+const heartCanvas = document.getElementById("heartCanvas");
+const heartButton = document.getElementById("toFlower");
+
+const heartShape = `
+  M 0 20
+  C -5 15 -25 2 -25 -10
+  C -25 -26 -6 -29 0 -13
+  C 6 -29 25 -26 25 -10
+  C 25 2 5 15 0 20 Z
+`;
+
+function createHeartSpiral() {
+  heartCanvas.innerHTML = "";
+  heartButton.classList.remove("show");
+
+  const ns = "http://www.w3.org/2000/svg";
+
+  for (let i = 0; i < CONFIG.heartCount; i++) {
+    const angle = i * 0.48;
+    const radius = 12 + i * 12.5;
+
+    const x = 500 + Math.cos(angle) * radius;
+    const y = 500 + Math.sin(angle) * radius;
+
+    const size = 0.35 + i * 0.014;
+
+    const group = document.createElementNS(ns, "g");
+
+    group.setAttribute(
+      "transform",
+      `translate(${x} ${y}) rotate(${angle * 57.2958}) scale(${size})`
+    );
+
+    const path = document.createElementNS(ns, "path");
+    path.setAttribute("d", heartShape);
+    path.setAttribute("class", "drawn-heart");
+
+    path.style.setProperty("--delay", `${i * 0.12}s`);
+
+    group.appendChild(path);
+    heartCanvas.appendChild(group);
+
+    const length = path.getTotalLength();
+
+    path.style.setProperty("--length", length);
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+  }
+
+  // El botón aparece cuando el espiral ya se ha dibujado.
+  const revealTime = Math.max(
+    6500,
+    CONFIG.heartCount * 120 + 1800
+  );
+
+  setTimeout(() => {
+    heartButton.classList.add("show");
+  }, revealTime);
+}
+
+
+/* ======================================
+   FLOR CHOCOLATE COSMOS
+====================================== */
+
+// No hay suficientes palabras diferentes para representar
+// literalmente todas las lenguas del mundo en una sola flor.
+// Esta colección incluye idiomas de distintas regiones;
+// el texto se repite siguiendo las curvas de los pétalos.
+
+const loveWords = [
+  "TE AMO", "I LOVE YOU", "JE T'AIME",
+  "TI AMO", "ICH LIEBE DICH", "EU TE AMO",
+  "TE QUIERO", "愛してる", "사랑해",
+  "我爱你", "我愛你", "Я ТЕБЯ ЛЮБЛЮ",
+  "Σ' ΑΓΑΠΩ", "أحبك", "אני אוהב אותך",
+  "मैं तुमसे प्यार करता हूँ", "நான் உன்னை காதலிக்கிறேன்",
+  "Mahal kita", "Aku cinta kamu", "Tôi yêu bạn",
+  "ฉันรักคุณ", "Seni seviyorum", "Szeretlek",
+  "Kocham cię", "Miluji tě", "Ľúbim ťa",
+  "Volim te", "Ljubim te", "Te iubesc",
+  "Обичам те", "Kocham cię", "Jeg elsker deg",
+  "Jag älskar dig", "Rakastan sinua", "Ég elska þig",
+  "Ik hou van jou", "Ek is lief vir jou",
+  "Nakupenda", "Ngiyakuthanda", "Aloha wau iā ʻoe",
+  "Mo ni fẹ́ràn rẹ", "Ndagukunda", "A hụrụ m gị n'anya",
+  "Main tumse pyar karta hoon", "আমি তোমাকে ভালোবাসি",
+  "હું તને પ્રેમ કરું છું", "હું તને ચાહું છું",
+  "હું તને પ્રેમ કરું છું", "Te iubesc mult",
+  "Kuv hlub koj", "Ua ou alofa ia te oe",
+  "Aroha ahau ki a koe", "Ke a go rata",
+  "Mi amas vin", "Saya cinta padamu",
+  "T'estimo", "Ti tengu caru", "Maite zaitut",
+  "Ek het jou lief", "Miluju tě", "Nalingi yo",
+  "Aš tave myliu", "Es tevi mīlu", "Ma armastan sind",
+  "Tá grá agam duit", "Tha gaol agam ort",
+  "Rwy'n dy garu di", "Me az kar", "Kuv hlub koj"
+];
+
+function createFlower() {
+  const ns = "http://www.w3.org/2000/svg";
+  const petals = document.getElementById("petals");
+  const center = document.getElementById("flowerCenter");
+
+  petals.innerHTML = "";
+  center.innerHTML = "";
+
+  const petalCount = 12;
+
+  for (let i = 0; i < petalCount; i++) {
+    const group = document.createElementNS(ns, "g");
+
+    // Alterna ligeramente el ángulo y el tamaño para
+    // evitar una simetría artificial demasiado perfecta.
+    const angle = i * (360 / petalCount) + (i % 2 ? 4 : 0);
+
+    group.setAttribute(
+      "transform",
+      `rotate(${angle} 300 290)`
+    );
+
+    const petal = document.createElementNS(ns, "use");
+    petal.setAttribute("href", "#petalShape");
+    petal.setAttribute("class", "petal");
+    petal.style.setProperty("--delay", `${1.2 + i * 0.18}s`);
+
+    group.appendChild(petal);
+
+    // Cada pétalo contiene su propio camino de texto.
+    const pathId = `wordsPath${i}`;
+
+    const textPath = document.createElementNS(ns, "path");
+    textPath.setAttribute("id", pathId);
+    textPath.setAttribute("d",
+      "M300 275 C275 235 275 175 300 95 C325 175 325 235 300 275"
+    );
+    textPath.setAttribute("fill", "none");
+
+    group.appendChild(textPath);
+
+    const text = document.createElementNS(ns, "text");
+    text.setAttribute("class", "petal-words");
+    text.style.setProperty("--delay", `${2.1 + i * 0.18}s`);
+
+    const textPathElement = document.createElementNS(ns, "textPath");
+    textPathElement.setAttribute("href", `#${pathId}`);
+    textPathElement.setAttribute("startOffset", "0%");
+
+    // Repite las declaraciones de amor para llenar el recorrido.
+    const phrases = [];
+
+    for (let j = 0; j < 7; j++) {
+      phrases.push(loveWords[(i * 7 + j) % loveWords.length]);
     }
 
-    replay.addEventListener("click", draw);
+    textPathElement.textContent = phrases.join("   ·   ");
 
-    draw();
-  </script>
+    text.appendChild(textPathElement);
+    group.appendChild(text);
+
+    petals.appendChild(group);
+  }
+
+  // Centro oscuro y detalles dorados del cosmos.
+  const disc = document.createElementNS(ns, "circle");
+  disc.setAttribute("cx", "300");
+  disc.setAttribute("cy", "290");
+  disc.setAttribute("r", "36");
+  disc.setAttribute("fill", "url(#centerGradient)");
+  disc.setAttribute("class", "flower-center");
+
+  center.appendChild(disc);
+
+  for (let i = 0; i < 26; i++) {
+    const angle = i * Math.PI * 2 / 26;
+    const r = 13 + (i % 4) * 4;
+
+    const dot = document.createElementNS(ns, "circle");
+    dot.setAttribute("cx", 300 + Math.cos(angle) * r);
+    dot.setAttribute("cy", 290 + Math.sin(angle) * r);
+    dot.setAttribute("r", i % 3 === 0 ? 2.4 : 1.5);
+    dot.setAttribute("class", "center-detail");
+
+    center.appendChild(dot);
+  }
+}
+
+
+/* ======================================
+   RECORRIDO COMPLETO
+====================================== */
+
+document.getElementById("startButton").addEventListener("click", () => {
+  showScreen("hearts");
+  createHeartSpiral();
+});
+
+heartButton.addEventListener("click", () => {
+  showScreen("flowerScreen");
+  createFlower();
+
+  // La flor termina de aparecer y permanece visible
+  // unos dos segundos antes de la transición oscura.
+  setTimeout(() => {
+    const letterScreen = document.getElementById("letterScreen");
+
+    letterScreen.classList.add("active");
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        letterScreen.classList.add("reveal");
+      });
+    });
+  }, 6500);
+});
+</script>
+
 </body>
 </html>
