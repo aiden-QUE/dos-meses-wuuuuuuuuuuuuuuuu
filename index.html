@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Felices dos meses, honey ♡</title>
 
 <style>
@@ -53,9 +53,7 @@ button {
   pointer-events: auto;
 }
 
-/* =================================
-   1. PORTADA AZUL
-================================= */
+/* PORTADA */
 
 #startScreen {
   overflow-y: auto;
@@ -129,9 +127,7 @@ button {
   background: #243c60;
 }
 
-/* =================================
-   2. ESPIRAL GIGANTE
-================================= */
+/* ESPIRAL DEL CORAZÓN */
 
 #heartScreen {
   overflow: hidden;
@@ -211,13 +207,17 @@ button {
   display: none;
 }
 
-/* =================================
-   3. CHOCOLATE COSMOS DE PALABRAS
-================================= */
+/* FLOR CHOCOLATE COSMOS */
 
 #flowerScreen {
   overflow: hidden;
-  background: #000;
+  background:
+    radial-gradient(
+      ellipse at center,
+      #101b30 0%,
+      #050810 52%,
+      #000 100%
+    );
 }
 
 #flowerSvg {
@@ -232,10 +232,10 @@ button {
 .flower-word {
   opacity: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-weight: normal;
-  letter-spacing: .15px;
+  font-weight: 500;
+  letter-spacing: .4px;
   text-anchor: middle;
-  animation: wordAppear .38s ease-out forwards;
+  animation: wordAppear .45s ease-out forwards;
 }
 
 @keyframes wordAppear {
@@ -247,9 +247,7 @@ button {
   }
 }
 
-/* =================================
-   4. TRANSICIÓN
-================================= */
+/* TRANSICIÓN */
 
 #fadeOverlay {
   position: fixed;
@@ -265,9 +263,7 @@ button {
   opacity: 1;
 }
 
-/* =================================
-   5. CARTA ANTIGUA
-================================= */
+/* CARTA ANTIGUA */
 
 #letterScreen {
   padding: 22px 14px;
@@ -522,8 +518,8 @@ Felices dos meses, mi amor. Que este sea uno de muchos aniversarios nuestros. �
 /* CONFIGURACIÓN */
 
 const HEART_DRAW_TIME = 14000;
-const WORD_INTERVAL = 75;
-const WORD_ANIMATION_TIME = 380;
+const WORD_INTERVAL = 48;
+const WORD_ANIMATION_TIME = 450;
 const WAIT_AFTER_FLOWER = 2000;
 
 const startScreen = document.getElementById("startScreen");
@@ -550,7 +546,7 @@ function showScreen(screen) {
   screen.classList.add("active");
 }
 
-/* CORAZÓN ESPIRAL */
+/* CORAZÓN ESPIRAL GIGANTE */
 
 function createHeartSpiral() {
   const centerX = 500;
@@ -615,7 +611,7 @@ startButton.addEventListener("click", () => {
   setTimeout(createHeartSpiral, 100);
 });
 
-/* PALABRAS */
+/* FRASES Y COLORES DE LA FLOR */
 
 const phrases = [
   "te amo", "I love you", "mi amor",
@@ -627,18 +623,20 @@ const phrases = [
   "always", "corazón", "te adoro"
 ];
 
-const shades = [
-  "#3b0616",
-  "#49071a",
-  "#560a20",
-  "#650e27",
-  "#74142d",
-  "#831b36",
-  "#91233d",
-  "#681027"
+const colors = [
+  "#75172f",
+  "#96304b",
+  "#572039",
+  "#203e72",
+  "#315a96",
+  "#527eb8",
+  "#789bc9",
+  "#18294e",
+  "#a34760",
+  "#4167a0"
 ];
 
-function addWord(parent, text, x, y, size, delayIndex) {
+function addWord(parent, text, x, y, size, index) {
   const node = document.createElementNS(
     "http://www.w3.org/2000/svg",
     "text"
@@ -648,31 +646,34 @@ function addWord(parent, text, x, y, size, delayIndex) {
   node.setAttribute("x", x);
   node.setAttribute("y", y);
   node.setAttribute("font-size", size);
-  node.setAttribute(
-    "fill",
-    shades[delayIndex % shades.length]
-  );
+  node.setAttribute("fill", colors[index % colors.length]);
   node.setAttribute("text-anchor", "middle");
   node.setAttribute("class", "flower-word");
-
-  node.style.animationDelay =
-    (delayIndex * WORD_INTERVAL) + "ms";
+  node.style.animationDelay = (index * WORD_INTERVAL) + "ms";
 
   parent.appendChild(node);
 }
 
-/* FLOR CHOCOLATE COSMOS */
+/* FLOR CHOCOLATE COSMOS: SOLO PALABRAS */
 
 function createFlower() {
   flowerWords.replaceChildren();
 
   let wordIndex = 0;
 
-  // Cada pétalo está formado por líneas de texto.
-  // Los ángulos distribuyen los pétalos alrededor del centro.
-  const petalAngles = [-90, -45, 0, 45, 90, 135, 180, 225];
+  // Pétalos largos y separados.
+  const petals = [
+    { angle: -90, length: 275, width: 49 },
+    { angle: -45, length: 265, width: 46 },
+    { angle: 0, length: 278, width: 48 },
+    { angle: 45, length: 260, width: 45 },
+    { angle: 90, length: 270, width: 48 },
+    { angle: 135, length: 260, width: 45 },
+    { angle: 180, length: 278, width: 48 },
+    { angle: 225, length: 265, width: 46 }
+  ];
 
-  petalAngles.forEach((angle, petalIndex) => {
+  petals.forEach((petal, petalIndex) => {
     const group = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "g"
@@ -680,88 +681,81 @@ function createFlower() {
 
     group.setAttribute(
       "transform",
-      `translate(450 455) rotate(${angle})`
+      `translate(450 455) rotate(${petal.angle})`
     );
 
     flowerWords.appendChild(group);
 
-    const rows = 21;
+    const rows = 17;
 
     for (let row = 0; row < rows; row++) {
       const t = row / (rows - 1);
-
-      // Forma larga con puntas estrechas y zona central ancha.
-      const widthShape = Math.pow(Math.sin(Math.PI * t), 0.72);
-      const halfWidth = 4 + 48 * widthShape;
-      const y = -42 - t * 245;
+      const shape = Math.pow(Math.sin(Math.PI * t), 0.8);
+      const halfWidth = 3 + petal.width * shape;
+      const y = -40 - t * petal.length;
 
       const phrase =
-        phrases[(petalIndex * 5 + row) % phrases.length];
+        phrases[(petalIndex * 4 + row) % phrases.length];
 
-      if (halfWidth > 34) {
-        // Dos frases con espacio entre ellas.
+      if (halfWidth > 31) {
         addWord(
           group,
           phrase,
-          -halfWidth * 0.48,
+          -halfWidth * 0.47,
           y,
-          8,
+          10,
           wordIndex++
         );
 
         const second =
-          phrases[(petalIndex * 5 + row + 7) % phrases.length];
+          phrases[(petalIndex * 4 + row + 9) % phrases.length];
 
         addWord(
           group,
           second,
-          halfWidth * 0.48,
+          halfWidth * 0.47,
           y,
-          8,
+          10,
           wordIndex++
         );
       } else {
-        // Una sola frase en las puntas.
         addWord(
           group,
           phrase,
           0,
           y,
-          8,
+          10,
           wordIndex++
         );
       }
     }
   });
 
-  // Centro oscuro: palabras pequeñas, sin círculo ni figura sólida.
-  const centerPhrases = [
-    "te amo", "love", "amor", "mi amor",
-    "te amo", "always", "my love", "te quiero"
+  // Centro hecho de palabras, sin círculo sólido.
+  const centerWords = [
+    "te amo", "love", "amor", "always",
+    "my love", "te quiero", "mi amor", "honey"
   ];
 
   for (let ring = 0; ring < 3; ring++) {
-    const radius = 7 + ring * 12;
+    const radius = 7 + ring * 14;
     const count = 5 + ring * 3;
 
     for (let i = 0; i < count; i++) {
       const angle = Math.PI * 2 * i / count;
 
-      const x = 450 + Math.cos(angle) * radius;
-      const y = 455 + Math.sin(angle) * radius;
-
       addWord(
         flowerWords,
-        centerPhrases[wordIndex % centerPhrases.length],
-        x,
-        y,
-        7,
+        centerWords[wordIndex % centerWords.length],
+        450 + Math.cos(angle) * radius,
+        455 + Math.sin(angle) * radius,
+        9,
         wordIndex++
       );
     }
   }
 
-  // Calcula el final según la última palabra.
+  // Tiempo calculado para que termine la última palabra.
   return Math.max(0, wordIndex - 1) * WORD_INTERVAL
     + WORD_ANIMATION_TIME;
 }
